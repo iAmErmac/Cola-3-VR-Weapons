@@ -1,0 +1,448 @@
+ACTOR PiledriverSelected : Inventory {}
+
+ACTOR PiledriverLevel : Inventory
+{
+	Inventory.MaxAmount 3
+}
+
+ACTOR PiledriverExp : Ammo
+{
+	Inventory.MaxAmount 40
+	+IGNORESKILL
+}
+
+ACTOR PiledriverClip : Ammo
+{
+	Inventory.MaxAmount 20
+	+INVENTORY.IGNORESKILL
+}
+
+ACTOR PiledriverPressure : Ammo
+{
+	Inventory.MaxAmount 400
+	+INVENTORY.IGNORESKILL
+}
+
+ACTOR TinyGunSmoke
+{
+	Radius 1
+	Height 1
+	RenderStyle Add
+	Scale .0125
+	+NOGRAVITY
+	+NOBLOCKMAP
+	+FLOORCLIP
+	States
+	{
+	Spawn:
+		SMOK ABCDEFGHIJKLMNOPQ 1 A_SetScale((scalex + 0.0125), (scaley + 0.0125))
+		Stop
+	}
+}
+
+ACTOR PiledriverSpear
+{
+	Radius 6
+	Height 4
+	PROJECTILE
+	-NoGravity
+	+BLOODSPLATTER
+	Speed 75
+	Damage (50)
+	Decal BulletChip
+	States
+	{
+	Spawn:
+		BLAD A 1 A_SpawnItemEx("TinyGunSmoke")
+		Loop
+	Death:
+	Crash:
+		RSMK A 0 A_PlaySound("piledriver/hit")
+		RSMK A 0 A_ChangeFlag(NOGRAVITY, 1)
+		RSMK A 0 A_SetTranslucent(0.9, 1)
+		RSMK A 0 A_SetScale(1.5,1.5)
+		RSMK A 0 A_SpawnDebris("TracerSpark")
+		RSMK A 2 A_SpawnDebris("PiledriverSpearChunks")
+		RSMK BCDE 2 
+		Stop
+	XDeath:
+		TNT1 A 3 A_PlaySound("hitflesh")
+		Stop
+	}
+}
+
+ACTOR PiledriverSpearExplosive : PiledriverSpear
+{
+	+NoGravity
+	DeathSound "Piledriver/explode"
+	Decal Scorch
+	Damage (20)
+	States
+	{
+	Death:
+	Crash:
+	XDeath:
+		FRME A 0 A_ChangeFlag(NOGRAVITY, 1)
+		FRME A 0 A_SetScale(0.4,0.4)
+		FRME A 0 A_SpawnDebris("TracerSpark")
+		FRME A 1 BRIGHT A_SpawnDebris("PiledriverSpearChunks")
+		FRME B 1 BRIGHT A_Explode(28,128,0)
+		FRME CDEFGHIJ 1 BRIGHT 
+		Stop
+	}
+}
+
+ACTOR PiledriverSpearMedium : PiledriverSpear
+{
+	Speed 50
+	Damage (40)
+}
+
+ACTOR PiledriverSpearWeak : PiledriverSpear
+{
+	Speed 30
+	Damage (25)
+}
+
+ACTOR PiledriverAltfireSpear : PiledriverSpear
+{
+	+NoGravity
+	+Ripper
+	Speed 90
+	Damage (100)
+}
+
+ACTOR PiledriverAltfireSuperSpear : PiledriverSpear
+{
+	+NoGravity
+	+Ripper
+	Speed 50
+	Damage (100)
+	States
+	{
+	Spawn:
+		BLAD AAAAA 1 A_SpawnItemEx("TinyGunSmoke")
+		BLAD A 0 A_PlaySound("ColaMissile/Explode", CHAN_AUTO)
+		BLAD A 1 A_SpawnItemEx("ThrownRobotExplosion")
+		Loop
+	}
+}
+
+ACTOR PiledriverSpearChunks
+{
+	Health 4
+	radius 3
+	height 6
+	speed .1
+	Mass		0
+	BounceFactor 0.3
+	+missile
+	+doombounce
+	+FLOORCLIP
+	+DONTSPLASH
+	+NOTELEPORT
+	States
+	{
+	Spawn:
+		FRG2 ABC 3 
+		Loop
+	Death:
+		FRG2 D 120
+		FRG2 D 1 A_FadeOut(0.05)
+		Wait
+	}
+}
+
+ACTOR Piledriver : ColaWeapon replaces PlasmaRifle
+{
+	Weapon.AmmoType1 "PiledriverClip"
+	Weapon.AmmoUse1 1
+	Weapon.SlotNumber 6
+	Weapon.AmmoType2 "PiledriverExp"
+	Weapon.AmmoUse2 5
+	Weapon.AmmoGive2 0
+	Weapon.SisterWeapon "PileDriverSuper"
+	Inventory.PickupMessage "Piledriver - \"Because nails are too small!\" (Slot 6)"
+	Inventory.PickupSound "Pickups/GetPiledriver"
+	+Weapon.Ammo_Optional
+	+Weapon.Alt_Ammo_Optional
+	+Weapon.Alt_Uses_Both
+	+Weapon.NoAutoFire
+	Scale 0.5
+    Inventory.Icon "PDRVICON"
+	States
+	{
+	Spawn:
+		PDRV Z -1
+		Wait
+	Select:
+		PDRV A 0 A_GiveInventory("PiledriverSelected", 1)
+		PDRV A 1 {
+			A_Raise;
+			A_Raise;
+		}
+		Wait
+	Deselect:
+		PDRV A 0 A_TakeInventory("PiledriverSelected", 999)
+		PDRV A 1 {
+			A_Lower;
+			A_Lower;
+			}
+		Wait
+	Ready:
+		PDRV A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWZOOM)
+		Loop
+	Fire:
+		PDRV A 0 A_JumpIfInventory("PiledriverClip",1,1)
+		Goto DryFire
+		PDRV A 0 A_TakeInventory("PiledriverPressure", 25)
+		PDRV A 0 A_JumpIfInventory("PiledriverLevel", 3, "AltCheck")
+		PDRV A 0 A_JumpIfInventory("PiledriverPressure",250,"FireHeavy")
+		PDRV A 0 A_JumpIfInventory("PiledriverPressure",100,"FireMedium")
+	FireWeak:
+		PDRV A 0 A_JumpIfInventory("PiledriverLevel", 2, "FireMedium")
+		PDRV A 0 A_PlayWeaponSound("Piledriver/FireWeak")
+		PDRV A 0 A_GunFlash
+		PDRV A 0 A_AlertMonsters
+		PDRV A 1 BRIGHT Offset(2,36) A_FireCustomMissile("PiledriverSpearWeak", 0, 1, 8)
+		PDRV A 1 BRIGHT Offset(5,42) A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 0 A_JumpIfInventory("PiledriverLevel", 1, 3)
+		PDRV A 1 Offset(6,50) A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(5,48) A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(4,45) A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(4,41) A_SetPitch(pitch + (0.75 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 0 A_JumpIfInventory("PiledriverLevel", 1, 2)
+		PDRV A 1 Offset(3,39) A_SetPitch(pitch + (1.25 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(2,33) A_SetPitch(pitch + (0.75 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(1,31)
+		PDRV A 1 A_Refire
+		Goto Ready
+	FireMedium:
+		PDRV A 0 A_PlayWeaponSound("Piledriver/FireMedium")
+		PDRV A 0 A_GunFlash
+		PDRV A 0 A_AlertMonsters
+		PDRV A 1 BRIGHT Offset(2,36) A_FireCustomMissile("PiledriverSpearMedium", 0, 1, 8)
+		PDRV A 1 BRIGHT Offset(5,42) A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 0 A_JumpIfInventory("PiledriverLevel", 1, 3)
+		PDRV A 1 Offset(6,50) A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(5,48) A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(4,45) A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(4,41) A_SetPitch(pitch + (0.75 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 0 A_JumpIfInventory("PiledriverLevel", 1, 2)
+		PDRV A 1 Offset(3,39) A_SetPitch(pitch + (1.25 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(2,33) A_SetPitch(pitch + (0.75 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(1,31)
+		PDRV A 1 A_Refire
+		Goto Ready
+	FireHeavy:
+		PDRV A 0 A_PlayWeaponSound("Piledriver/FireHeavy")
+		PDRV A 0 A_GunFlash
+		PDRV A 0 A_AlertMonsters
+		PDRV A 1 BRIGHT Offset(2,36) A_FireCustomMissile("PiledriverSpear", 0, 1, 8)
+		PDRV A 1 BRIGHT Offset(5,42) A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 0 A_JumpIfInventory("PiledriverLevel", 1, 3)
+		PDRV A 1 Offset(6,50) A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(5,48) A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(4,45) A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(4,41) A_SetPitch(pitch + (0.75 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 0 A_JumpIfInventory("PiledriverLevel", 1, 2)
+		PDRV A 1 Offset(3,39) A_SetPitch(pitch + (1.25 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(2,33) A_SetPitch(pitch + (0.75 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(1,31)
+		PDRV A 1 A_Refire
+		Goto Ready
+	FireSuperHeavy:
+		PDRV A 0 A_PlayWeaponSound("Piledriver/FireHeavy")
+		PDRV A 0 A_GunFlash
+		PDRV A 0 A_AlertMonsters
+		PDRV A 1 BRIGHT Offset(2,36) A_FireCustomMissile("PiledriverSpearExplosive", 0, 1, 8)
+		PDRV A 1 BRIGHT Offset(5,42) A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 0 A_JumpIfInventory("PiledriverLevel", 1, 3)
+		PDRV A 1 Offset(6,50) A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(5,48) A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(4,45) A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(4,41) A_SetPitch(pitch + (0.75 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 0 A_JumpIfInventory("PiledriverLevel", 1, 2)
+		PDRV A 1 Offset(3,39) A_SetPitch(pitch + (1.25 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(2,33) A_SetPitch(pitch + (0.75 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(1,31)
+		PDRV A 1 A_Refire
+		Goto Ready
+	AltCheck:
+		PDRV A 0 A_JumpIfInventory("PiledriverPressure",250,"FireSuperHeavy")
+		PDRV A 0 A_JumpIfInventory("PiledriverPressure",100,"FireHeavy")
+		Goto FireMedium
+	Dryfire:
+		PDRV A 0 A_JumpIf(CallACS("Autoreload")==1,"Reload")
+	BenignDryfire:
+		PDRV A 1 A_PlaySound("weapons/dryfire", 5)
+		PDRV A 1 Offset(2,34)
+		PDRV A 1 Offset(1,33)
+		Goto Ready
+	Drypressure:
+		PDRV A 1 A_PlaySound("Piledriver/Dry", 5)
+		PDRV A 1 Offset(2,34)
+		PDRV A 1 Offset(1,33)
+		Goto Ready
+	Reload:
+		PDRV A 0 A_JumpIfInventory("PiledriverClip", 0, 1)
+		Goto ReloadStart
+		PDRV A 1 A_WeaponReady(WRF_NOFIRE)
+		Goto Ready
+	ReloadStart: //65
+		PDRV B 1 A_PlaySound("Piledriver/Reload", 5)
+		/*
+		PDRV B 1 Offset(1,35)
+		PDRV B 1 Offset(2,38)
+		PDRV B 1 Offset(3,41)
+		PDRV B 1 Offset(4,44)
+		PDRV B 1 Offset(5,47)
+		PDRV B 1 Offset(6,50)
+		PDRV B 1 Offset(7,52)
+		PDRV B 1 Offset(8,54)
+		PDRV B 1 Offset(9,56)
+		PDRV B 1 Offset(10,57)
+		PDRV B 1 Offset(11,58)
+		PDRV B 1 Offset(13,59)
+		PDRV B 1 Offset(14,60)
+		PDRV B 1 Offset(12,65)
+		PDRV B 1 Offset(11,66)
+		PDRV B 1 Offset(10,67)
+		PDRV B 1 Offset(9,68)
+		PDRV B 1 Offset(8,69)
+		PDRV B 1 Offset(7,70)
+		PDRV B 1 Offset(8,69)
+		PDRV B 1 Offset(9,68)
+		PDRV B 1 Offset(12,67)
+		PDRV B 1 Offset(13,69)
+		PDRV B 1 Offset(14,71)
+		PDRV B 1 Offset(15,72)
+		PDRV B 1 Offset(16,73)
+		PDRV B 1 Offset(17,74)
+		PDRV B 1 Offset(18,75)
+		PDRV B 1 Offset(19,76)
+		PDRV B 1 Offset(18,75)
+		PDRV B 1 Offset(17,74)
+		PDRV B 1 Offset(16,73)
+		PDRV B 1 Offset(15,72)
+		PDRV B 1 Offset(14,70)
+		PDRV B 1 Offset(13,68)
+		PDRV B 1 Offset(12,66)
+		PDRV B 1 Offset(11,57)
+		PDRV A 1 Offset(9,50)
+		PDRV A 1 Offset(5,45)
+		PDRV A 1 Offset(2,39)
+		PDRV A 1 Offset(1,35)
+		PDRV A 1 Offset(-1,34)
+		PDRV A 1 Offset(-2,35)
+		PDRV A 1 Offset(-3,35)
+		PDRV A 1 Offset(-3,36)
+		PDRV A 1 Offset(-4,36)
+		PDRV A 1 Offset(-4,37)
+		PDRV A 1 Offset(-4,38)
+		PDRV A 1 Offset(-5,40)
+		PDRV A 1 Offset(-5,42)
+		PDRV A 1 Offset(-5,41)
+		PDRV A 1 Offset(-5,40)
+		PDRV A 1 Offset(-6,39)
+		PDRV A 1 Offset(-6,39)
+		PDRV A 1 Offset(-6,38)
+		PDRV A 1 Offset(-6,37)
+		PDRV A 1 Offset(-6,36)  A_GiveInventory("PiledriverClip", 999)
+		PDRV A 1 Offset(-5,35)
+		PDRV A 1 Offset(-5,34)
+		PDRV A 1 Offset(-5,33)
+		PDRV A 1 Offset(-5,33)
+		PDRV A 1 Offset(-4,32)
+		PDRV A 1 Offset(-3,32)
+		PDRV A 1 Offset(-2,32)
+		PDRV A 1 Offset(-1,32)
+		*/
+		PDRV BCDE 3
+		PDRV F 1
+		PDRV GHIJK 3
+		PDRV K 10
+		PDRV LMNOPQRST 3
+		PDRV A 1 A_GiveInventory("PiledriverClip", 999)
+		Goto Ready
+	Altfire:
+		PDRV A 0 A_JumpIfInventory("PiledriverExp", 5, 1)
+		Goto BenignDryfire
+		PDRV A 0 A_JumpIfInventory("PiledriverClip", 1, 1)
+		Goto Dryfire
+		PDRV A 0 A_JumpIfInventory("PiledriverPressure", 50, 1)
+		Goto Drypressure
+		PDRV AAAAA 1 A_WeaponOffset(frandom(-2.0, 2.0), frandom(30.0, 34.0), WOF_INTERPOLATE)
+		PDRV A 1 {
+			A_AlertMonsters;
+			A_GunFlash;
+			A_PlaySound("Piledriver/AltFire", CHAN_WEAPON);
+			A_FireCustomMissile("PiledriverAltfireSpear", 0,1,8);
+			A_WeaponOffset(2, 2, WOF_ADD|WOF_INTERPOLATE);
+			A_TakeInventory("PiledriverPressure", 999);
+		}
+		PDRV A 1 A_Weaponoffset(8, 8, WOF_ADD|WOF_INTERPOLATE)
+		PDRV A 1 A_Weaponoffset(1, 1, WOF_ADD|WOF_INTERPOLATE)
+		PDRV A 1 A_Weaponoffset(-2, -2, WOF_ADD|WOF_INTERPOLATE)
+		PDRV A 1 A_Weaponoffset(-4, -4, WOF_ADD|WOF_INTERPOLATE)
+		PDRV A 1 A_Weaponoffset(-8, -8, WOF_ADD|WOF_INTERPOLATE)
+		PDRV A 1 A_Weaponoffset(-4, -4, WOF_ADD|WOF_INTERPOLATE)
+		PDRV A 10 A_WeaponReady(WRF_NOSECONDARY)
+		Goto Ready		
+	}
+}
+
+ACTOR PileDriverSuper : Piledriver
+{
+	Weapon.SisterWeapon "Piledriver"
+	+POWERED_UP
+	States
+	{
+	Fire:
+		PDRV A 0 A_PlayWeaponSound("Piledriver/FireHeavy")
+		PDRV A 0 A_GunFlash
+		PDRV A 0 A_AlertMonsters
+		PDRV A 1 BRIGHT Offset(2,36) {
+			A_FireCustomMissile("PiledriverPiercingSpear", 0, 0, 8);
+			A_FireCustomMissile("PiledriverPiercingSpear", -8, 0, 8);
+			A_FireCustomMissile("PiledriverPiercingSpear", 8, 0, 8);
+		}
+		PDRV A 1 BRIGHT Offset(5,42) A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(4,45) A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(4,41) A_SetPitch(pitch + (0.75 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(3,39) A_SetPitch(pitch + (1.25 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(2,33) A_SetPitch(pitch + (0.75 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		PDRV A 1 Offset(1,31)
+		PDRV A 1 A_Refire
+		Goto Ready
+	Altfire:
+		PDRV A 0 A_JumpIfInventory("PiledriverExp", 5, 1)
+		Goto BenignDryfire
+		PDRV A 0 A_JumpIfInventory("PiledriverClip", 1, 1)
+		Goto Dryfire
+		PDRV A 0 A_JumpIfInventory("PiledriverPressure", 50, 1)
+		Goto Drypressure
+		PDRV AAAAA 1 A_WeaponOffset(frandom(-2.0, 2.0), frandom(30.0, 34.0), WOF_INTERPOLATE)
+		PDRV A 1 {
+			A_AlertMonsters;
+			A_GunFlash;
+			A_PlaySound("Piledriver/AltFire", CHAN_WEAPON);
+			A_FireCustomMissile("PiledriverAltfireSuperSpear", 0,1,8);
+			A_WeaponOffset(2, 2, WOF_ADD|WOF_INTERPOLATE);
+			A_TakeInventory("PiledriverPressure", 999);
+		}
+		PDRV A 1 A_Weaponoffset(8, 8, WOF_ADD|WOF_INTERPOLATE)
+		PDRV A 1 A_Weaponoffset(1, 1, WOF_ADD|WOF_INTERPOLATE)
+		PDRV A 1 A_Weaponoffset(-2, -2, WOF_ADD|WOF_INTERPOLATE)
+		PDRV A 1 A_Weaponoffset(-4, -4, WOF_ADD|WOF_INTERPOLATE)
+		PDRV A 1 A_Weaponoffset(-8, -8, WOF_ADD|WOF_INTERPOLATE)
+		PDRV A 1 A_Weaponoffset(-4, -4, WOF_ADD|WOF_INTERPOLATE)
+		PDRV A 10 A_WeaponReady(WRF_NOSECONDARY)
+		Goto Ready		
+	}
+}
+
+ACTOR PiledriverPiercingSpear : PiledriverSpear
+{
+	+RIPPER
+}

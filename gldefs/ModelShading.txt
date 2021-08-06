@@ -1,0 +1,38 @@
+// Frying pan
+material texture "models/weapons/frypan/arms.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/frypan/fry_pan.png" { shader "shaders/simsun.fp" }
+
+// Deck of cards
+material texture "models/weapons/cards/arms.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/cards/card_deck.png" { shader "shaders/simsun.fp" }
+
+// Pistol
+material texture "models/weapons/pistol/revolver.png" { shader "shaders/simsun.fp" }
+
+// Shotgun
+material texture "models/weapons/shotgun/shotgun.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/shotgun/shotgun_shell.png" { shader "shaders/simsun.fp" }
+
+// Plasma Rifle
+material texture "models/weapons/plasmagun/rifle.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/plasmagun/heat.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/plasmagun/heat1.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/plasmagun/heat2.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/plasmagun/heat3.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/plasmagun/heat4.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/plasmagun/heat5.png" { shader "shaders/simsun.fp" }
+
+// Missile launcher
+material texture "models/weapons/sidewinder/smr.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/sidewinder/smr_ext1.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/sidewinder/smr_plate.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/sidewinder/smr_ammo.png" { shader "shaders/simsun.fp" }
+
+// Pile Driver
+material texture "models/weapons/piledriver/jackhammer.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/piledriver/gas_label.png" { shader "shaders/simsun.fp" }
+material texture "models/weapons/piledriver/jackhammer_mag.png" { shader "shaders/simsun.fp" }
+
+// Toothpaste laser
+material texture "models/weapons/toothpastelaser/particlegun.jpg" { shader "shaders/simsun.fp" }
+material texture "models/weapons/toothpastelaser/particlegun_ammo.png" { shader "shaders/simsun.fp" }

@@ -1,0 +1,533 @@
+
+//Pan hit animation for all weapons
+
+Model ColaHandgun
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model ColaHandgun
+{
+   Path "Models\Weapons\pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+
+Model ColaHandgunSuper
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model ColaHandgunSuper
+{
+   Path "Models\Weapons\pistol"
+   Model 0 "revolver.md3"
+   Skin 0 "revolver.png"
+   
+   Scale -0.7 0.7 0.7
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+
+Model PumpShotgun
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model PumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+
+Model PumpShotgunSuper
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model PumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+
+Model CardThrower
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model CardThrower
+{
+   Path "Models\Weapons\cards"
+   Model 0 "card_deck.md3"
+   Skin 0 "no_arms.png"
+   
+   Offset 0.0 0.0 0.0
+   
+   FrameIndex WDWN A 0 0
+   FrameIndex WDWN B 0 0
+   FrameIndex WDWN C 0 0
+   FrameIndex WDWN D 0 0
+   FrameIndex WDWN E 0 0
+}
+
+Model CardThrowerSuper
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model CardThrowerSuper
+{
+   Path "Models\Weapons\cards"
+   Model 0 "card_deck.md3"
+   Skin 0 "no_arms.png"
+   
+   Offset 0.0 0.0 0.0
+   
+   FrameIndex WDWN A 0 0
+   FrameIndex WDWN B 0 0
+   FrameIndex WDWN C 0 0
+   FrameIndex WDWN D 0 0
+   FrameIndex WDWN E 0 0
+}
+
+Model PlasmaAutorifle
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model PlasmaAutorifle
+{
+   Path "Models\Weapons\plasmagun"
+   Model 0 "plasmagun.md3"
+   SurfaceSkin 0 0 "rifle.png"
+   SurfaceSkin 0 1 "rifle.png"
+   SurfaceSkin 0 2 "heat.png"
+   
+   Scale -1.4 1.4 1.4
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+
+Model PlasmaAutorifleSuper
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model PlasmaAutorifleSuper
+{
+   Path "Models\Weapons\plasmagun"
+   Model 0 "plasmagun.md3"
+   SurfaceSkin 0 0 "rifle.png"
+   SurfaceSkin 0 1 "rifle.png"
+   SurfaceSkin 0 2 "heat.png"
+   
+   Scale -1.4 1.4 1.4
+   Offset 3.0 -24.0 -10.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 -20.0 -13.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 -16.0 -16.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 -12.0 -19.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 -8.0 -22.0
+   FrameIndex WDWN E 0 0
+}
+
+Model MissileLauncher
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model MissileLauncher
+{
+   Path "Models\Weapons\sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -3.0 -6.0
+   
+   FrameIndex WDWN A 0 0
+   Offset 6.0 0.0 -9.0
+   FrameIndex WDWN B 0 0
+   Offset 9.0 3.0 -12.0
+   FrameIndex WDWN C 0 0
+   Offset 12.0 6.0 -15.0
+   FrameIndex WDWN D 0 0
+   Offset 15.0 9.0 -18.0
+   FrameIndex WDWN E 0 0
+}
+
+Model Piledriver
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model Piledriver
+{
+   Path "Models\Weapons\piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "cylinder.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -11.0
+   
+   //Ready
+   FrameIndex WDWN A 0 0	FrameIndex WDWN A 1 0
+   Offset 6.0 -20.0 -14.0
+   FrameIndex WDWN B 0 0	FrameIndex WDWN B 1 0
+   Offset 9.0 -16.0 -17.0
+   FrameIndex WDWN C 0 0	FrameIndex WDWN C 1 0
+   Offset 12.0 -12.0 -20.0
+   FrameIndex WDWN D 0 0	FrameIndex WDWN D 1 0
+   Offset 15.0 -8.0 -23.0
+   FrameIndex WDWN E 0 0	FrameIndex WDWN E 1 0
+}
+
+Model PileDriverSuper
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model PileDriverSuper
+{
+   Path "Models\Weapons\piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "cylinder.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 3.0 -24.0 -11.0
+   
+   //Ready
+   FrameIndex WDWN A 0 0	FrameIndex WDWN A 1 0
+   Offset 6.0 -20.0 -14.0
+   FrameIndex WDWN B 0 0	FrameIndex WDWN B 1 0
+   Offset 9.0 -16.0 -17.0
+   FrameIndex WDWN C 0 0	FrameIndex WDWN C 1 0
+   Offset 12.0 -12.0 -20.0
+   FrameIndex WDWN D 0 0	FrameIndex WDWN D 1 0
+   Offset 15.0 -8.0 -23.0
+   FrameIndex WDWN E 0 0	FrameIndex WDWN E 1 0
+}
+
+Model ToothpasteLaser
+{
+   Path "Models\Weapons\frypan"
+   Model 0 "fry_pan.md3"
+   SurfaceSkin 0 0 "arms.png"
+   SurfaceSkin 0 1 "fry_pan.png"
+   
+   Scale -0.8 0.8 0.8
+   Offset -10.0 -22.0 -12.0
+   
+   FrameIndex FPAN A 0 0
+   FrameIndex FPAN B 0 1
+   FrameIndex FPAN C 0 2
+   FrameIndex FPAN D 0 3
+   FrameIndex FPAN E 0 4
+}
+
+Model ToothpasteLaser
+{
+   Path "Models\Weapons\toothpastelaser"
+   Model 0 "particlegun.md3"
+   SurfaceSkin 0 0 "particlegun_ammo.png"
+   SurfaceSkin 0 1 "particlegun.jpg"
+   SurfaceSkin 0 2 "particlegun.jpg"
+   SurfaceSkin 0 3 "particlegun.jpg"
+   Model 1 "particlegun_display.md3"
+   Skin 1 "particlegun_display1.png"
+   
+   Scale -1.2 1.2 1.2
+   Offset 3.0 -25.0 -8.0
+   
+   //Ready
+   FrameIndex WDWN A 0 0	FrameIndex WDWN A 1 0
+   Offset 6.0 -20.0 -11.0
+   FrameIndex WDWN B 0 0	FrameIndex WDWN B 1 0
+   Offset 9.0 -15.0 -14.0
+   FrameIndex WDWN C 0 0	FrameIndex WDWN C 1 0
+   Offset 12.0 -10.0 -17.0
+   FrameIndex WDWN D 0 0	FrameIndex WDWN D 1 0
+   Offset 15.0 -5.0 -20.0
+   FrameIndex WDWN E 0 0	FrameIndex WDWN E 1 0
+}

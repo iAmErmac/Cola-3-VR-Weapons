@@ -1,0 +1,140 @@
+class ColaWeapon : Weapon replaces Fist
+{
+    default
+    {
+        Weapon.BobStyle "Alpha";
+        Weapon.BobSpeed 2.5;
+        Weapon.BobRangeX 0.2;
+        Weapon.BobRangeY 0.5;
+        Inventory.Icon "UNKNA0"; // if no icon defined, show <!> instead.
+        +Weapon.NoAlert
+        +Inventory.AlwaysPickup
+        +Weapon.Ammo_Optional
+    }
+    int PanSwing; // Tracks how far across the screen the pan attack is.
+	States
+	{
+	Select:
+		TNT1 A 1 A_Raise;
+		Wait;
+	Deselect:
+		TNT1 A 1 A_Lower;
+		Wait;
+	Ready:
+		TNT1 A 1 A_WeaponReady;
+		Loop;
+	Fire:
+		TNT1 A 1;
+		Goto Ready;
+	Flash:
+		TNT1 A 1 A_Light2;
+		TNT1 A 1 A_Light1;
+		Goto LightDone;
+	Zoom:
+		/*
+		"####" "#" 1 A_WeaponOffset(36.0, 54.0, WOF_INTERPOLATE);
+		"####" "#" 1 A_WeaponOffset(80.0, 96.0, WOF_INTERPOLATE);
+		"####" "#" 3 A_WeaponOffset(1.0, 999.0); // I need to retain the last used sprite so I offset it way off screen instead of TNT1'ing it. DO NOT INTERPOLATE THIS
+		"####" "#" 1 A_Overlay(69, "FryingPan");
+		"####" "#" 10 A_WeaponOffset(1.0, 999.0); // DON'T INTERPOLATE THIS EITHER
+		"####" "#" 1 A_WeaponOffset(80.0, 96.0, WOF_INTERPOLATE);
+		"####" "#" 1 A_WeaponOffset(60.0, 80.0, WOF_INTERPOLATE);
+		"####" "#" 1 A_WeaponOffset(48.0, 66.0, WOF_INTERPOLATE);
+		"####" "#" 1 A_WeaponOffset(36.0, 54.0, WOF_INTERPOLATE);
+		"####" "#" 1 A_WeaponOffset(24.0, 46.0, WOF_INTERPOLATE);
+		"####" "#" 1 A_WeaponOffset(12.0, 38.0, WOF_INTERPOLATE);
+		"####" "#" 0 A_Jump(256, "Ready");
+		*/
+		WDWN A 0 A_GiveInventory("SwingingFryingPan",1); //Need a flag to check and remove double shotgun overlay
+		WDWN A 1 A_WeaponOffset(18.0, 0.0, WOF_INTERPOLATE);
+		WDWN B 1 A_WeaponOffset(36.0, 50.0, WOF_INTERPOLATE);
+		WDWN C 1 A_WeaponOffset(54.0, 100.0, WOF_INTERPOLATE);
+		WDWN D 1 A_WeaponOffset(72.0, 150.0, WOF_INTERPOLATE);
+		WDWN E 1 A_WeaponOffset(90.0, 200.0, WOF_INTERPOLATE);
+		WDWN E 1 A_Overlay(69, "FryingPan");
+		WDWN E 10 A_WeaponOffset(90.0, 200.0, WOF_INTERPOLATE);
+		WDWN D 1 A_WeaponOffset(72.0, 150.0, WOF_INTERPOLATE);
+		WDWN C 1 A_WeaponOffset(54.0, 100.0, WOF_INTERPOLATE);
+		WDWN B 1 A_WeaponOffset(36.0, 50.0, WOF_INTERPOLATE);
+		WDWN A 3 A_WeaponOffset(18.0, 0.0, WOF_INTERPOLATE);
+		WDWN A 0 A_TakeInventory("SwingingFryingPan",99);
+		WDWN A 0 A_JumpIfInventory("CardThrowerSelected", 1, "ReadyDelay");
+		WDWN A 0 A_Jump(256, "Ready");
+		Goto Ready;
+	FryingPan:
+		FPAN A 0 {
+            A_OverlayFlags(69, PSPF_ADDWEAPON, 0);
+            if ( GetCvar("cola_playersound") == 1)
+            {
+                A_PlaySound("ColaVeryMaleAttack", CHAN_VOICE);
+            }
+        }
+		FPAN A 0 {
+			A_OverlayOffset(69, -128, 8);
+			if ( CountInv("PowerWeaponLevel2") >= 1 )
+			{
+				A_PlaySound("pan/powerswing", CHAN_WEAPON);
+			}
+			else
+			{
+				A_PlaySound("pan/swing", CHAN_WEAPON);
+			}
+        }
+        FPAN ABCDE 1;
+    FryingPanContinue:
+		"####" # 0
+		{
+            int runPunch = 50 + ( Vel.XY.Length() * 3); // Adds player's run speed to melee damage. It's fun!
+            //A_LogInt(runpunch);
+            if ( invoker.PanSwing == 6 )
+            {
+                invoker.PanSwing = 0;
+                A_TakeInventory("PanHitSomething", 999); // For safety
+                return ResolveState("null"); // Pan's made it across the screen, erase it.
+            }
+            //A_OverlayOffset(69, 96, 12, WOF_INTERPOLATE|WOF_ADD);
+            if ( CountInv("PanHitSomething") == 1 )
+            {
+                invoker.PanSwing = 15;
+                return ResolveState("FryingPanPreRecoil");
+            }
+			else if ( CountInv("PowerWeaponLevel2") >= 1 )
+			{
+				A_CustomPunch(runPunch * 3,1,0,"ColaWeaponStrongerHitPuff", 100);
+			}
+			else
+			{
+				A_CustomPunch(runPunch,1,0,"ColaWeaponHitPuff", 100);
+			}
+            invoker.PanSwing++;
+			return ResolveState("FryingPanContinue");
+        }
+		Stop;
+    FryingPanPreRecoil:
+        FPAN DCBA 1; //A_OverlayOffset(69, random(-2, 0), random(-2, 0), WOF_ADD);
+    FryingPanRecoil:
+        FPAN A 1; //A_OverlayOffset(69, (-12 + random(-2, 2)), (24 + random(-2, 2)), WOF_INTERPOLATE|WOF_ADD);
+        FPAN A 0
+        {
+            A_TakeInventory("PanHitSomething", 999);
+            if ( invoker.PanSwing > 0 )
+            {
+                invoker.PanSwing--;
+                return ResolveState("FryingPanRecoil");
+            }
+            else
+            {
+                return ResolveState("null");
+            }
+        }
+        Stop;
+	}
+}
+
+Class SwingingFryingPan : Inventory
+{
+	default
+	{
+	Inventory.Maxamount 1;
+	}
+}

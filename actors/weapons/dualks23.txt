@@ -1,0 +1,759 @@
+ACTOR ShotgunLeftTracerBullet : TracerBullet
+{
+	//MissileType ShotgunLeftTracerTrail
+	MissileType None
+	States
+	{
+	Death:
+	Crash:
+		PUFF A 0 A_SpawnItemEx("GunSmoke")
+		PUFF A 0 BRIGHT A_SpawnDebris("TracerSpark")
+		PUFF B 1 BRIGHT A_SetTranslucent(0.9,0)
+		PUFF B 1 BRIGHT
+		PUFF CD 2 BRIGHT
+		Stop
+	XDeath:
+		TNT1 A 3
+		Stop
+	}
+}
+
+Actor ShotgunLeftTracerTrail : TracerTrail {}
+
+Actor BiggerTracerBulletPistolLeft : BiggerTracerBulletPistol
+{
+	//MissileType LeftTracerTrailBigger
+	MissileType None
+}
+
+Actor LeftTracerTrailBigger: TracerTrailBigger {}
+
+ACTOR PumpShotgunClip2 : Ammo
+{
+	Inventory.MaxAmount 4
+	+INVENTORY.IGNORESKILL
+}
+
+ACTOR DualPumpShotgun : ColaWeapon
+{
+	Weapon.AmmoType1 "PumpShotgunClip"
+	Weapon.AmmoUse1 1
+	Weapon.SlotNumber 2
+	Weapon.SlotPriority 0
+	Weapon.AmmoType2 "PumpShotgunExp"
+	Weapon.AmmoUse2 0
+	Weapon.AmmoGive2 0
+	Scale 0.3
+	Weapon.SisterWeapon "DualPumpShotgunSuper"
+	Inventory.PickupMessage "2nd Shotgun: \"Because one buckshot blaster is never enough!\" (Slot 2)"
+	Tag "KS-23 Riot Shotguns"
+    Inventory.Icon "KSS2ICON"
+	+Weapon.NoAutoFire
+	+Weapon.Ammo_Optional
+	States
+	{
+	Spawn:
+		KSSG A -1
+		Wait
+	Select:
+		2SHT Z 0 A_GiveInventory("PumpShotgunSelected", 1)
+		2SHT Z 1 {
+			A_Raise;
+			A_Raise;
+		}
+		Wait
+	Deselect:
+		2SHT Z 0 A_TakeInventory("PumpShotgunSelected", 999)
+		2SHT Z 1 {
+			A_Lower;
+			A_Lower;
+			}
+		Wait
+	Ready:
+		2SHT A 0 A_Overlay(1001, "OtherGun", GFF_NOEXTCHANGE)
+	RealReady:
+		2SHT A 0 A_JumpIfInventory("ColaSynthFireReload", 1, "Reload")
+		2SHT A 0 A_JumpIfInventory("ColaSynthFireRight", 1, "FireRightGun")
+		2SHT A 1 A_WeaponReady(WRF_NOFIRE|WRF_ALLOWZOOM)
+		Loop
+	OtherGun:
+		3SHT A 0 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT A 0 A_JumpIfInventory("ColaSynthFireReload", 1, "ReloadLeft")
+		3SHT A 1 A_JumpIfInventory("ColaSynthFireLeft", 1, "FireLeftGun")
+		Loop
+	OtherGunHide:
+		TNT1 A 10
+		3SHT A 0 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		Goto OtherGun
+        
+    // Fire subroutines. These differ only for which gun they come out of.
+    FireSubroutineRight: // This overlay dynamically reassigns the number of pellets based on the current weapon level.
+        TNT1 A 0 {
+            A_PlaySound("Pumpshotgun/Fire", CHAN_AUTO);
+            A_GunFlash;
+            A_AlertMonsters;
+            A_GiveInventory("PumpShotgunPelletCounter", ( (CountInv("PumpShotgunLevel") * 3) + 9 ) );
+            while ( CountInv("PumpShotgunPelletCounter") != 0)
+            {
+                A_FireCustomMissile("ShotgunTracerBullet", frandom(-2.5,2.5), 0, 8, 10, FPF_AIMATANGLE, frandom(-1.5,1.5));
+                A_TakeInventory("PumpShotgunPelletCounter", 1);
+            }
+            A_FireCustomMissile("ShotgunTracerBullet", frandom(-1.5,1.5), 1, 8, 10, FPF_AIMATANGLE, frandom(-1.5,1.5)); // Last pellet costs ammo. The rest don't.
+            if ( CountInv("PumpShotgunLevel") == 3 )
+            {
+                A_SpawnItemEx("ShotgunCasing", 20, 12, 36, 10, frandom(2.0, 8.0), 1, random(-25,-40), SXF_NOCHECKPOSITION|SXF_TRANSFERPITCH);
+            }
+			if(GetCVAR("colavr_weapons_smoke"))
+			{
+				A_FireProjectile("ShotgunBarrelSmoke",0,0,0,0,FPF_NOAUTOAIM,0);
+			}
+        }
+        Stop
+    ShellEjectRight:
+        //TNT1 A 0 A_SpawnItemEx("ShotgunCasing", 0, 16, 36, 10, frandom(2.0, 8.0), 1, random(-25,-40), SXF_NOCHECKPOSITION|SXF_TRANSFERPITCH)
+        TNT1 A 0 A_FireProjectile("ShellCasingSpawner",0,0,0,0,FPF_NOAUTOAIM,0)
+        Stop
+    FireSubroutineLeft: // This overlay dynamically reassigns the number of pellets based on the current weapon level.
+        TNT1 A 0 {
+            A_PlaySound("Pumpshotgun/Fire", CHAN_AUTO);
+            A_GunFlash("GunFlashLeft");
+            A_AlertMonsters;
+            A_GiveInventory("PumpShotgunPelletCounter", ( (CountInv("PumpShotgunLevel") * 3) + 9 ) );
+            while ( CountInv("PumpShotgunPelletCounter") != 0)
+            {
+                A_FireCustomMissile("ShotgunLeftTracerBullet", frandom(-2.5,2.5), 0, -20, 10, FPF_AIMATANGLE, frandom(-1.5,1.5));
+                A_TakeInventory("PumpShotgunPelletCounter", 1);
+            }
+            A_FireCustomMissile("ShotgunLeftTracerBullet", frandom(-1.5,1.5), 0, -20, 10, FPF_AIMATANGLE, frandom(-1.5,1.5));
+            if ( CountInv("PumpShotgunLevel") == 3 )
+            {
+                A_SpawnItemEx("ShotgunCasing", 20, -12, 36, 10, frandom(-8.0, -18.0), 1, random(25,40), SXF_NOCHECKPOSITION|SXF_TRANSFERPITCH);
+            }
+			if(GetCVAR("colavr_weapons_smoke"))
+			{
+				A_FireProjectile("ShotgunLeftBarrelSmoke",0,0,0,0,FPF_NOAUTOAIM,0);
+			}
+        }
+        Stop
+    ShellEjectLeft: // Eject a shell to the left.
+        //TNT1 A 0 A_SpawnItemEx("ShotgunCasing", 0, -16, 36, 10, frandom(-8.0, -18.0), 1, random(25,40), SXF_NOCHECKPOSITION|SXF_TRANSFERPITCH)
+        TNT1 A 0 A_FireProjectile("ShellCasingSpawnerLeft",0,0,0,0,FPF_NOAUTOAIM,0)
+        Stop
+		
+	// Ooooh here comes the MESS
+	// RIGHT GUN SHIT
+	/*
+	FireRightGun: //18
+		2SHT A 0 A_JumpIfInventory("PumpShotgunClip",1,1)
+		Goto DryFire
+        2SHT B 1 BRIGHT {
+            A_Blast(BF_NOIMPACTDAMAGE, 255, 128, 10.0, "GunSmoke", "");
+            A_Overlay(12, "FireSubroutineRight");
+            A_Light2;
+        }
+		2SHT C 1 BRIGHT {
+            A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE);
+            A_Light1;
+        }
+		2SHT D 1 BRIGHT {
+            A_SetPitch(pitch - (2.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE);
+            A_Light0;
+        }
+		2SHT E 1 A_SetPitch(pitch - (3.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT F 1 A_SetPitch(pitch - (2.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT G 1 A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT H 1 A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT I 1 A_SetPitch(pitch + (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT J 1 A_SetPitch(pitch + (2.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT K 1 A_SetPitch(pitch + (4.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT L 1 A_SetPitch(pitch + (3.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT M 1 A_SetPitch(pitch + (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT N 1 
+		2SHT A 5
+		2SHT A 0 A_JumpIfInventory("PumpShotgunLevel", 3, "NoPump")
+		2SHT A 0 A_JumpIfInventory("PumpShotgunLevel", 2, "PumpLevel2")
+		2SHT A 0 A_JumpIfInventory("PumpShotgunLevel", 1, "PumpLevel1")
+		Goto PumpLevel0
+	PumpLevel2: //13
+		2SHR A 1 A_SetPitch(pitch + (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR C 1 A_SetPitch(pitch + (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR E 1 A_SetPitch(pitch - (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE) 
+        2SHR E 0 A_Overlay(557, "ShellEjectRight")
+		2SHR G 1
+		TNT1 A 6 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		2SHR G 1 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		2SHR E 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR CA 1 A_JumpIfInventory("ColaSynthFireRight",1,"FireRightGun")
+		2SHT A 0 A_CheckReload
+		Goto RealReady
+	PumpLevel1: //26
+		2SHR A 1 A_SetPitch(pitch + (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR C 1 A_SetPitch(pitch + (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR E 1 A_SetPitch(pitch - (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE) 
+        2SHR E 0 A_Overlay(557, "ShellEjectRight")
+		2SHR F 1 A_SetPitch(pitch - (0.4 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR G 1
+		TNT1 A 9 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		2SHR G 1 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		2SHR F 1 A_SetPitch(pitch - (0.1 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR E 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR C 1 A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR A 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT A 1 A_SetPitch(pitch - (0.1 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT A 6 
+		2SHT A 0 A_CheckReload
+		Goto RealReady
+	PumpLevel0: //33
+		2SHR A 1 A_SetPitch(pitch + (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR B 1 A_SetPitch(pitch + (0.4 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR C 1 A_SetPitch(pitch + (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR D 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR E 1 A_SetPitch(pitch - (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE) 
+        2SHR E 0 A_Overlay(557, "ShellEjectRight")
+		2SHR F 1 A_SetPitch(pitch - (0.4 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR G 1
+		TNT1 A 12 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		2SHR G 1 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		2SHR F 1 A_SetPitch(pitch - (0.1 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR E 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR D 1 A_SetPitch(pitch - (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR C 1 A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR B 1 A_SetPitch(pitch - (0.4 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR A 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT A 1 A_SetPitch(pitch - (0.1 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT A 6
+	NoPump:
+		2SHT A 0 A_CheckReload
+		Goto RealReady
+	*/
+	FireRightGun:
+		2SHT A 0 A_JumpIfInventory("PumpShotgunClip",1,1)
+		Goto DryFire
+        2SHT B 1 BRIGHT {
+            A_Blast(BF_NOIMPACTDAMAGE, 255, 128, 10.0, "GunSmoke", "");
+            A_Overlay(12, "FireSubroutineRight");
+            A_Light2;
+        }
+		2SHT B 1 BRIGHT A_Light1
+		2SHT C 2 BRIGHT A_Light0
+		2SHT C 0 A_JumpIfInventory("PumpShotgunLevel", 3, "NoPump")
+		2SHT C 0 A_JumpIfInventory("PumpShotgunLevel", 2, "PumpLevel2")
+		2SHT C 0 A_JumpIfInventory("PumpShotgunLevel", 1, "PumpLevel1")
+		Goto PumpLevel0
+	PumpLevel2: //10
+		2SHT DEF 1
+		2SHT G 1 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		2SHT HI 1
+		2SHT J 2 A_Overlay(556, "ShellEjectRight")
+		2SHT K 1 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		2SHT L 1 A_JumpIfInventory("ColaSynthFireRight",1,"FireRightGun")
+		Goto PumpEnd
+	PumpLevel1: //18
+		2SHT DEF 2
+		2SHT G 2 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		2SHT HI 2
+		2SHT J 3 A_Overlay(556, "ShellEjectRight")
+		2SHT K 2 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		2SHT L 1
+		Goto PumpEnd
+	PumpLevel0: //23
+		2SHT DEF 2
+		2SHT G 3 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		2SHT HI 3
+		2SHT J 4 A_Overlay(556, "ShellEjectRight")
+		2SHT K 2 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		2SHT L 2
+		Goto PumpEnd
+	NoPump:
+		2SHT B 2
+	PumpEnd:
+		2SHT A 1 A_CheckReload
+		Goto RealReady
+	Dryfire:
+		2SHT A 0 A_JumpIf(CallACS("Autoreload")==1,"Reload")
+		2SHT A 3 A_PlaySound("weapons/dryfire", 5)
+		Goto RealReady
+	/*
+	Reload:
+		2SHT A 0 A_JumpIfInventory("PumpShotgunClip", 0, 1)
+		Goto ReloadStart
+		2SHT A 1
+		Goto RealReady
+	ReloadStart: //12
+		2SHT A 1 
+		2SHR ABCDEFG 1
+		TNT1 A 4
+	ReloadWork: //18
+		TNT1 A 0 A_JumpIfInventory("PowerWeaponLevel2", 1, "ReloadSkipGrab")
+		TNT1 A 0 A_JumpIfInventory("PumpShotgunLevel", 1, "ReloadSkipGrab")
+		TNT1 A 1
+		TNT1 AAAAAAAAAAAAAAAA 1 A_JumpIfInventory("ColaSynthFireRight",1,"FireRightGun")
+		TNT1 A 1 
+	ReloadSkipGrab: //17
+		TNT1 A 0 A_GiveInventory("PumpShotgunClip", 1)
+		TNT1 A 1 A_PlaySound("PumpShotgun/Load", 5)
+		TNT1 AAAAAAAAAAAA 1 A_JumpIfInventory("ColaSynthFireRight",1,"FireRightGun")
+		TNT1 A 4 
+		TNT1 A 0 A_JumpIfInventory("PumpShotgunClip", 0, "ReloadFinish")
+		Goto ReloadWork
+	ReloadFinish: //30
+        2SHR E 0 A_Overlay(557, "ShellEjectRight")
+		TNT1 A 16 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		2SHR G 1 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		2SHR F 1 A_SetPitch(pitch - (0.1 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR E 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR D 1 A_SetPitch(pitch - (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR C 1 A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR B 1 A_SetPitch(pitch - (0.4 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHR A 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT A 1 A_SetPitch(pitch - (0.1 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT A 6
+		Goto RealReady
+	*/
+	Reload:
+		2SHT A 0 A_JumpIfInventory("PumpShotgunClip", 0, 3)
+		2SHR AB 2
+		Goto ReloadStart
+		2SHT A 1
+		Goto RealReady
+	ReloadStart:
+		2SHR C 3
+	ReloadWork: //8
+		2SHR C 0 A_JumpIfInventory("PowerWeaponLevel2", 1, "ReloadSkipGrab")
+		2SHR C 0 A_JumpIfInventory("PumpShotgunLevel", 1, "ReloadSkipGrab")
+		2SHR C 1
+		2SHR CCCCCC 1 A_JumpIfInventory("ColaSynthFireRight",1,"FireRightGun")
+		2SHR C 1
+	ReloadSkipGrab: //10
+		2SHR D 0 A_GiveInventory("PumpShotgunClip", 1)
+		2SHR D 3
+		2SHR E 2 A_PlaySound("PumpShotgun/Load", 5)
+		2SHR EFFGG 1 A_JumpIfInventory("ColaSynthFireRight",1,"FireRightGun")		
+		2SHR G 0 A_JumpIfInventory("PumpShotgunClip", 0, "ReloadFinish")
+		Goto ReloadWork
+	ReloadFinish: //18
+		2SHR HIJ 2
+		2SHT G 2 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		2SHT HIJ 2
+		2SHT K 1 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		2SHT L 3
+		Goto RealReady
+		
+	// LEFT GUN SHIT	
+	/*
+	FireLeftGun:
+		3SHT A 0 A_JumpIfInventory("PumpShotgunClip2",1,1)
+		Goto DryFireLeft
+		3SHT B 1 BRIGHT {
+            A_Blast(BF_NOIMPACTDAMAGE, 255, 128, 10.0, "GunSmoke", "");
+            A_Overlay(13, "FireSubroutineLeft");
+            A_Light2;
+        }
+		3SHT C 1 BRIGHT {
+            A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE);
+            A_Light1;
+        }
+		3SHT D 1 BRIGHT {
+            A_SetPitch(pitch - (2.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE);
+            A_Light0;
+        }
+        3SHT B 0 A_TakeInventory("PumpShotgunClip2", 1)
+		3SHT E 1 A_SetPitch(pitch - (3.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT F 1 A_SetPitch(pitch - (2.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT G 1 A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT H 1 A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT I 1 A_SetPitch(pitch + (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT J 1 A_SetPitch(pitch + (2.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT K 1 A_SetPitch(pitch + (4.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT L 1 A_SetPitch(pitch + (3.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT M 1 A_SetPitch(pitch + (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT N 1
+		3SHT A 8
+		3SHT A 0 A_JumpIfInventory("PumpShotgunLevel", 3, "NoPumpLeft")
+		3SHT A 0 A_JumpIfInventory("PumpShotgunLevel", 2, "PumpLevel2Left")
+		3SHT A 0 A_JumpIfInventory("PumpShotgunLevel", 1, "PumpLevel1Left")
+		Goto PumpLevel0Left
+	PumpLevel2Left:
+		3SHR A 1 A_SetPitch(pitch + (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR C 1 A_SetPitch(pitch + (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR E 1 A_SetPitch(pitch - (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+        3SHR E 0 A_Overlay(556, "ShellEjectLeft")
+		3SHR G 1
+		TNT1 A 8 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		3SHR G 1 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		3SHR E 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR CA 1 A_JumpIfInventory("ColaSynthFireLeft",1,"FireLeftGun")
+		3SHT A 0 A_CheckReload
+		Goto OtherGun
+	PumpLevel1Left:
+		3SHR A 1 A_SetPitch(pitch + (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR C 1 A_SetPitch(pitch + (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR E 1 A_SetPitch(pitch - (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE) 
+        3SHR E 0 A_Overlay(556, "ShellEjectLeft")
+		3SHR F 1 A_SetPitch(pitch - (0.4 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR G 1
+		TNT1 A 12 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		3SHR G 1 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		3SHR F 1 A_SetPitch(pitch - (0.1 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR E 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR C 1 A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR A 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT A 1 A_SetPitch(pitch - (0.1 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT A 6 
+		3SHT A 0 A_CheckReload
+		Goto OtherGun
+	PumpLevel0Left:
+		3SHR A 1 A_SetPitch(pitch + (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR B 1 A_SetPitch(pitch + (0.4 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR C 1 A_SetPitch(pitch + (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR D 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR E 1 A_SetPitch(pitch - (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE) 
+        3SHR E 0 A_Overlay(556, "ShellEjectLeft")
+		3SHR F 1 A_SetPitch(pitch - (0.4 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR G 1
+		TNT1 A 16 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		3SHR G 1 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		3SHR F 1 A_SetPitch(pitch - (0.1 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR E 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR D 1 A_SetPitch(pitch - (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR C 1 A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR B 1 A_SetPitch(pitch - (0.4 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR A 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT A 1 A_SetPitch(pitch - (0.1 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT A 6
+	NoPumpLeft:
+		3SHT A 0 A_CheckReload
+		Goto OtherGun
+	*/
+	FireLeftGun:
+		3SHT A 0 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT A 0 A_JumpIfInventory("PumpShotgunClip2",1,1)
+		Goto DryfireLeft
+        3SHT B 1 BRIGHT {
+            A_Blast(BF_NOIMPACTDAMAGE, 255, 128, 10.0, "GunSmoke", "");
+            A_Overlay(12, "FireSubroutineLeft");
+            A_Light2;
+        }
+		3SHT B 1 BRIGHT {
+			A_Light1;
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+		3SHT C 2 BRIGHT {
+			A_Light0;
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+        3SHT C 0 A_TakeInventory("PumpShotgunClip2", 1)
+		3SHT C 0 A_JumpIfInventory("PumpShotgunLevel", 3, "NoPumpLeft")
+		3SHT C 0 A_JumpIfInventory("PumpShotgunLevel", 2, "PumpLevel2Left")
+		3SHT C 0 A_JumpIfInventory("PumpShotgunLevel", 1, "PumpLevel1Left")
+		Goto PumpLevel0Left
+	PumpLevel2Left: //10
+		3SHT DEF 1 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT G 1 {
+			A_PlaySound("Pumpshotgun/Back", CHAN_AUTO);
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+		3SHT HI 1 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT J 2 {
+			A_Overlay(556, "ShellEjectLeft");
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+		3SHT K 1 {
+			A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO);
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+		3SHT L 1 {
+			A_JumpIfInventory("ColaSynthFireLeft",1,"FireLeftGun");
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+		Goto PumpEndLeft
+	PumpLevel1Left: //18
+		3SHT DEF 2 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT G 2 {
+			A_PlaySound("Pumpshotgun/Back", CHAN_AUTO);
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+		3SHT HI 2 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT J 3 {
+			A_Overlay(556, "ShellEjectLeft");
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+		3SHT K 2 {
+			A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO);
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+		3SHT L 1 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		Goto PumpEndLeft
+	PumpLevel0Left: //23
+		3SHT DEF 2 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT G 3 {
+			A_PlaySound("Pumpshotgun/Back", CHAN_AUTO);
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+		3SHT HI 3 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT J 4 {
+			A_Overlay(556, "ShellEjectLeft");
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+		3SHT K 2 {
+			A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO);
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+		3SHT L 2 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		Goto PumpEndLeft
+	NoPumpLeft:
+		3SHT B 2 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+	PumpEndLeft:
+		3SHT A 1 A_CheckReload
+		Goto OtherGun
+	DryfireLeft:
+		3SHT A 0 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT A 0 A_JumpIf(CallACS("Autoreload")==1,"ReloadLeft")
+		3SHT A 3 A_PlaySound("weapons/dryfire", 5)
+		Goto OtherGun
+	/*
+	ReloadLeft:
+		3SHT A 0 A_JumpIfInventory("PumpShotgunClip2", 0, 1)
+		Goto ReloadStartLeft
+		3SHT A 1
+		Goto OtherGun
+	ReloadStartLeft:
+		3SHT A 1 
+		3SHR ABCDEFG 1
+		TNT1 A 8
+	ReloadWorkLeft:
+		TNT1 A 0 A_JumpIfInventory("PowerWeaponLevel2", 1, "ReloadSkipGrabLeft")
+		TNT1 A 0 A_JumpIfInventory("PumpShotgunLevel", 1, "ReloadSkipGrabLeft")
+		TNT1 AAAAAAAAAAAAAAAAAAAA 1 A_JumpIfInventory("ColaSynthFireLeft",1,"FireLeftGun")
+		TNT1 A 1
+	ReloadSkipGrabLeft:
+		TNT1 A 0 A_GiveInventory("PumpShotgunClip2", 1)
+		TNT1 A 1 A_PlaySound("PumpShotgun/Load", 5)
+		TNT1 AAAAAAAAAAAAAA 1 A_JumpIfInventory("ColaSynthFireLeft",1,"FireLeftGun")
+		TNT1 A 4
+		TNT1 A 0 A_JumpIfInventory("PumpShotgunClip2", 0, "ReloadFinishLeft")
+		Goto ReloadWorkLeft
+	ReloadFinishLeft:
+        3SHR E 0 A_Overlay(556, "ShellEjectLeft")
+		TNT1 A 20 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		3SHR G 1 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		3SHR F 1 A_SetPitch(pitch - (0.1 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR E 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR D 1 A_SetPitch(pitch - (0.3 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR C 1 A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR B 1 A_SetPitch(pitch - (0.4 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHR A 1 A_SetPitch(pitch - (0.2 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT A 1 A_SetPitch(pitch - (0.1 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT A 6
+		Goto OtherGun
+	*/
+	ReloadLeft:
+		3SHT A 0 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT A 0 A_JumpIfInventory("PumpShotgunClip2", 0, 3)
+		3SHR AB 2
+		Goto ReloadStartLeft
+		3SHT A 1
+		Goto OtherGun
+	ReloadStartLeft:
+		3SHT A 0 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHR C 3
+	ReloadWorkLeft: //8
+		3SHT A 0 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHR C 0 A_JumpIfInventory("PowerWeaponLevel2", 1, "ReloadSkipGrabLeft")
+		3SHR C 0 A_JumpIfInventory("PumpShotgunLevel", 1, "ReloadSkipGrabLeft")
+		3SHR C 1
+		3SHR CCCCCC 1 A_JumpIfInventory("ColaSynthFireLeft",1,"FireLeftGun")
+		3SHR C 1
+	ReloadSkipGrabLeft: //10
+		3SHT A 0 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHR D 0 A_GiveInventory("PumpShotgunClip2", 1)
+		3SHR D 3
+		3SHR E 2 A_PlaySound("PumpShotgun/Load", 5)
+		3SHR EFFGG 1 A_JumpIfInventory("ColaSynthFireLeft",1,"FireLeftGun")		
+		3SHR G 0 A_JumpIfInventory("PumpShotgunClip2", 0, "ReloadFinishLeft")
+		Goto ReloadWorkLeft
+	ReloadFinishLeft: //18
+		3SHT A 0 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHR HIJ 2
+		3SHT G 2 A_PlaySound("Pumpshotgun/Back", CHAN_AUTO)
+		3SHT HIJ 2
+		3SHT K 1 A_PlaySound("Pumpshotgun/Forward", CHAN_AUTO)
+		3SHT L 3
+		Goto OtherGun
+		
+	Flash:
+		TNT1 A 0 A_JumpIf(GetCVAR("colavr_weapons_mf")==true, "MuzzleFlash")
+		TNT1 A 1 A_Light2
+		TNT1 A 1 A_Light1
+		TNT1 A 1 A_Light0
+		Stop
+	GunFlashLeft:
+		TNT1 A 0 A_JumpIf(GetCVAR("colavr_weapons_mf")==true, "MuzzleFlashLeft")
+		TNT1 A 1 A_Light2
+		TNT1 B 1 A_Light1
+		TNT1 C 1 A_Light0
+		Stop
+	MuzzleFlash:
+		PSMF A 1 Bright A_Light2
+		PSMF B 1 Bright A_Light1
+		PSMF C 1 Bright A_Light0
+		PSMF D 1 Bright
+		Stop
+	MuzzleFlashLeft:
+		PLMF A 1 Bright A_Light2
+		PLMF B 1 Bright A_Light1
+		PLMF C 1 Bright A_Light0
+		PLMF D 1 Bright
+		Stop
+	}
+}
+
+ACTOR DualPumpShotgunSuper : DualPumpShotgun
+{
+	Weapon.SisterWeapon "DualPumpShotgun"
+	+POWERED_UP
+	States
+	{
+	Select:
+		2SHT Z 0 A_GiveInventory("PumpShotgunSelected", 1)
+		2SHT Z 1 {
+			A_Raise;
+			A_Raise;
+		}
+		Wait
+	Deselect:
+		2SHT Z 0 A_TakeInventory("PumpShotgunSelected", 999)
+		2SHT Z 1 {
+			A_Lower;
+			A_Lower;
+			}
+		Wait
+	Ready:
+		2SHT A 0 A_Overlay(1001, "OtherGun", GFF_NOEXTCHANGE)
+	RealReady:
+		2SHT A 0 A_JumpIfInventory("ColaSynthFireReload", 1, "Reload")
+		2SHT A 0 A_JumpIfInventory("ColaSynthFireRight", 1, "FireRightGun")
+		2SHT A 1 A_WeaponReady(WRF_NOFIRE|WRF_ALLOWZOOM)
+		Loop
+	OtherGun:
+		3SHT A 0 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT A 0 A_JumpIfInventory("ColaSynthFireReload", 1, "ReloadLeft")
+		3SHT A 1 A_JumpIfInventory("ColaSynthFireLeft", 1, "FireLeftGun")
+		Loop
+	OtherGunHide:
+		TNT1 A 10
+		3SHT A 0 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		Goto OtherGun
+	/*
+	FireRightGun: //18
+		2SHT A 0 A_JumpIfInventory("PumpShotgunClip",1,1)
+		Goto DryFire
+		2SHT B 0 A_PlaySound("Pumpshotgun/Fire", CHAN_AUTO)
+		2SHT B 0 A_AlertMonsters
+		PSHT B 0 A_Blast(BF_NOIMPACTDAMAGE, 255, 128, 10.0, "GunSmoke", "")
+		2SHT BBBBBBBBB 0 A_FireCustomMissile("BiggerTracerBulletPistol", frandom(-2.5,2.5), 0, 8, 0, FPF_AIMATANGLE, frandom(-1.5,1.5))
+		2SHT B 0 A_FireCustomMissile("OverheatFlamebolt", 0, 0, 8)
+		2SHT B 0 A_Light2
+		2SHT B 1 BRIGHT Offset(2,36) A_FireCustomMissile("BiggerTracerBulletPistol", frandom(-1.5,1.5), 1, 8, 0, FPF_AIMATANGLE, frandom(-1.5,1.5))
+		2SHT B 0 A_Light1
+		2SHT C 1 BRIGHT A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT C 0 A_Light0
+		2SHT D 1 BRIGHT A_SetPitch(pitch - (2.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT E 1 A_SetPitch(pitch - (3.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT F 1 A_SetPitch(pitch - (2.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT G 1 A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT H 1 A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT I 1 A_SetPitch(pitch + (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT J 1 A_SetPitch(pitch + (2.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT K 1 A_SetPitch(pitch + (4.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT L 1 A_SetPitch(pitch + (3.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT M 1 A_SetPitch(pitch + (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		2SHT N 1 
+		2SHT A 5
+		Goto RealReady
+	FireLeftGun:
+		3SHT A 0 A_JumpIfInventory("PumpShotgunClip2",1,1)
+		Goto DryFireLeft
+		3SHT B 0 A_PlaySound("Pumpshotgun/Fire", CHAN_AUTO)
+		3SHT B 0 A_AlertMonsters
+		3SHT B 0 A_Blast(BF_NOIMPACTDAMAGE, 255, 128, 10.0, "GunSmoke", "")
+		3SHT BBBBBBBBB 0 A_FireCustomMissile("BiggerTracerBulletPistol", frandom(-2.5,2.5), 0, -8, 0, FPF_AIMATANGLE, frandom(-1.5,1.5))
+		3SHT B 0 A_FireCustomMissile("OverheatFlamebolt", 0, 0, -8)
+		3SHT B 0 A_Light2
+		3SHT B 0 A_TakeInventory("PumpShotgunClip2", 1)
+		3SHT B 1 BRIGHT Offset(2,36) A_FireCustomMissile("BiggerTracerBulletPistol", frandom(-1.5,1.5), 0, -8, 0, FPF_AIMATANGLE, frandom(-1.5,1.5))
+		3SHT B 0 A_Light1
+		3SHT C 1 BRIGHT A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT C 0 A_Light0
+		3SHT D 1 BRIGHT A_SetPitch(pitch - (2.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT E 1 A_SetPitch(pitch - (3.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT F 1 A_SetPitch(pitch - (2.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT G 1 A_SetPitch(pitch - (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT H 1 A_SetPitch(pitch - (0.5 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT I 1 A_SetPitch(pitch + (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT J 1 A_SetPitch(pitch + (2.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT K 1 A_SetPitch(pitch + (4.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT L 1 A_SetPitch(pitch + (3.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT M 1 A_SetPitch(pitch + (1.0 * CallACS("RecoilAmount")), SPF_INTERPOLATE)
+		3SHT N 1
+		3SHT A 8
+		Goto OtherGun
+	*/
+	FireRightGun: //7
+		2SHT A 0 A_JumpIfInventory("PumpShotgunClip",1,1)
+		Goto DryFire
+        2SHT B 0 {
+			A_PlaySound("Pumpshotgun/Fire", CHAN_AUTO);
+			A_GunFlash;
+			A_AlertMonsters;
+            A_Blast(BF_NOIMPACTDAMAGE, 255, 128, 10.0, "GunSmoke", "");
+		}
+		2SHT BBBBBBBBB 0 A_FireCustomMissile("BiggerTracerBulletPistol", frandom(-2.5,2.5), 0, -8, 0, FPF_AIMATANGLE, frandom(-1.5,1.5))
+		2SHT B 0 {
+			A_FireCustomMissile("OverheatFlamebolt", 0, 0, 8);
+            A_Light2;
+        }
+		2SHT B 1 BRIGHT {
+			A_FireCustomMissile("BiggerTracerBulletPistol", frandom(-1.5,1.5), 1, 8, 0, FPF_AIMATANGLE, frandom(-1.5,1.5));
+            A_Light1;
+        }
+		"####" # 0 A_JumpIf(GetCVAR("colavr_weapons_smoke")==false, 2)
+		"####" # 0 A_FireProjectile("ShotgunBarrelSmoke",0,0,0,0,FPF_NOAUTOAIM,0)
+		2SHT B 1 BRIGHT A_Light0
+		2SHT C 2 BRIGHT
+		2SHT B 2
+		2SHT A 1
+		Goto RealReady
+	FireLeftGun:
+		3SHT A 0 A_JumpIfInventory("PumpShotgunClip2",1,1)
+		Goto DryFireLeft
+        3SHT B 0 {
+			A_PlaySound("Pumpshotgun/Fire", CHAN_AUTO);
+			A_GunFlash("GunFlashLeft");
+			A_AlertMonsters;
+            A_Blast(BF_NOIMPACTDAMAGE, 255, 128, 10.0, "GunSmoke", "");
+		}
+		3SHT BBBBBBBBB 0 A_FireCustomMissile("BiggerTracerBulletPistolLeft", frandom(-2.5,2.5), 0, -20, 0, FPF_AIMATANGLE, frandom(-1.5,1.5))
+		3SHT B 0 {
+			//A_FireCustomMissile("OverheatFlamebolt", 0, 0, 8);
+			A_SpawnItemEx("OverheatFlamebolt", 0, -2, 15, 25);
+            A_Light2;
+			A_TakeInventory("PumpShotgunClip2", 1);
+        }
+		3SHT B 1 BRIGHT {
+			A_FireCustomMissile("BiggerTracerBulletPistolLeft", frandom(-1.5,1.5), 0, -20, 0, FPF_AIMATANGLE, frandom(-1.5,1.5));
+            A_Light1;
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+        }
+		"####" # 0 A_JumpIf(GetCVAR("colavr_weapons_smoke")==false, 2)
+		"####" # 0 A_FireProjectile("ShotgunLeftBarrelSmoke",0,0,0,0,FPF_NOAUTOAIM,0)
+		3SHT B 1 BRIGHT {
+			A_Light0;
+			A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide");
+		}
+		3SHT C 2 BRIGHT A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT B 2 A_JumpIfInventory("SwingingFryingPan", 1, "OtherGunHide")
+		3SHT A 1
+		Goto OtherGun
+	}
+}

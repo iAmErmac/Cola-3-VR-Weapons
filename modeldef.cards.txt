@@ -1,0 +1,46 @@
+
+Model CardThrower
+{
+   Path "Models\Weapons\cards"
+   Model 0 "card_deck.md3"
+   SurfaceSkin 0 0 "card_deck.png"
+   SurfaceSkin 0 1 "card_deck.png"
+   SurfaceSkin 0 2 "card_deck.png"
+   SurfaceSkin 0 3 "arms.png"
+   
+   Scale -0.75 0.75 0.75
+   Offset -6.0 -22.0 -12.0
+   
+   FrameIndex VDCK A 0 0
+   FrameIndex VDCK B 0 1
+   FrameIndex VDCK C 0 2
+   FrameIndex VDCK D 0 3
+   FrameIndex VDCK E 0 4
+   
+   //Empty hand
+   FrameIndex VDCE A 0 8
+   FrameIndex VDCE B 0 9
+   FrameIndex VDCE C 0 10
+}
+
+//Super mode
+Model CardThrowerSuper
+{
+   Path "Models\Weapons\cards"
+   Model 0 "card_deck.md3"
+   SurfaceSkin 0 0 "card_deck.png"
+   SurfaceSkin 0 1 "card_deck.png"
+   SurfaceSkin 0 2 "card_deck.png"
+   SurfaceSkin 0 3 "arms.png"
+   
+   Scale -0.75 0.75 0.75
+   Offset -6.0 -22.0 -12.0
+   
+   FrameIndex VDCK A 0 0
+   FrameIndex VDCK B 0 1
+   FrameIndex VDCK C 0 2
+   FrameIndex VDCK D 0 3
+   FrameIndex VDCK E 0 4
+   FrameIndex VDCK F 0 5
+   FrameIndex VDCX A 0 6
+}

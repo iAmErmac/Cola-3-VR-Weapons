@@ -1,0 +1,494 @@
+ACTOR PlasmaAutorifleSelected : Inventory {}
+
+ACTOR PlasmaAutorifleLevel : Inventory
+{
+	Inventory.MaxAmount 3
+}
+
+ACTOR PlasmaAutorifleExp : Ammo
+{
+	Inventory.MaxAmount 40
+	+IGNORESKILL
+}
+
+ACTOR PlasmaAutorifleClip : Ammo
+{
+	Inventory.MaxAmount 20
+	+INVENTORY.IGNORESKILL
+}
+
+ACTOR PlasmaAutorifleHeat : Ammo
+{
+	Inventory.MaxAmount 1500
+	+INVENTORY.IGNORESKILL
+}
+
+ACTOR PlasmaAutorifleBullet : FastProjectile
+{
+	Radius 6
+	Height 4
+	PROJECTILE
+	+BLOODSPLATTER
+	Speed 75
+	Damage (4*random(1,3))
+	Decal BulletChip
+	Scale 0.5
+	SeeSound ""
+	MissileType "PlasmaAutorifleBulletTrail"
+	MissileHeight 8
+	RenderStyle Add
+	Translation "0:255=%[0.00,0.00,0.00]:[2.00,1.00,0.00]"
+	States
+	{
+	Spawn:
+		SLSS ABCDEF 2 Bright
+		Loop
+	Death:
+		SLSE ABCDEF 2 Bright
+		Stop
+	}
+}
+
+ACTOR PlasmaAutorifleBulletTrail
+{
+	Scale 0.5
+	RenderStyle Add
+	+NoGravity
+	Translation "0:255=%[0.00,0.00,0.00]:[2.00,1.00,0.00]"
+	States
+	{
+	Spawn:
+		SLSS ABCDEF 1 Bright A_FadeOut(0.2)
+		Stop
+	}
+}
+
+ACTOR PlasmaAutorifleBulletLevel1 : PlasmaAutorifleBullet
+{
+	Damage (6*random(1,3))
+	MissileType "PlasmaAutorifleBulletTrailLevel1"
+	Translation "0:255=%[0.00,0.00,0.00]:[1.00,0.00,1.00]"
+}
+
+ACTOR PlasmaAutorifleBulletTrailLevel1 : PlasmaAutorifleBulletTrail
+{
+	Translation "0:255=%[0.00,0.00,0.00]:[1.00,0.00,1.00]"
+}
+
+ACTOR PlasmaAutorifleBulletLevel2 : PlasmaAutorifleBullet
+{
+	Damage (8*random(1,3))
+	MissileType "PlasmaAutorifleBulletTrailLevel2"
+	Translation "0:255=%[0.00,0.00,0.00]:[0.00,1.00,2.00]"
+}
+
+ACTOR PlasmaAutorifleBulletTrailLevel2 : PlasmaAutorifleBulletTrail
+{
+	Translation "0:255=%[0.00,0.00,0.00]:[0.00,1.00,2.00]"
+}
+
+ACTOR PlasmaAutorifleBulletLevel3 : PlasmaAutorifleBullet
+{
+	Damage (10*random(1,3))
+	MissileType "PlasmaAutorifleBulletTrailLevel3"
+	Translation "0:255=%[0.00,0.00,0.00]:[0.00,2.00,0.00]"
+}
+
+ACTOR PlasmaAutorifleBulletTrailLevel3 : PlasmaAutorifleBulletTrail
+{
+	Translation "0:255=%[0.00,0.00,0.00]:[0.00,2.00,0.00]"
+}
+
+ACTOR PlasmaAutorifleBulletLevelX : PlasmaAutorifleBullet
+{
+	Damage (15*random(1,3))
+	MissileType "PlasmaAutorifleBulletTrailLevelX"
+	Translation "0:255=%[0.00,0.00,0.00]:[2.00,0.00,0.00]"
+}
+
+ACTOR PlasmaAutorifleBulletTrailLevelX : PlasmaAutorifleBulletTrail
+{
+	Translation "0:255=%[0.00,0.00,0.00]:[2.00,0.00,0.00]"
+}
+
+ACTOR PlasmaMercuryMissile
+{
+	Scale 0.75
+	Radius 11
+	Height 8
+	Speed 50
+	Damage (100)
+	Projectile
+	DeathSound "MercuryMissile/Explode"
+	Decal Scorch
+	DamageType Fire
+	Scale 0.5
+	States
+	{
+	Spawn:
+		MRCM A 1 Bright A_SpawnItemEx("ColaMissileFlameSmaller",-15)
+		loop
+	Death:
+		FRME A 0 A_SetScale(0.5, 0.5)
+		FRME A 2 BRIGHT A_Scream
+		FRME B 2 BRIGHT A_Explode(32, 96, 0)
+		FRME BCDEFGHIJ 2 BRIGHT
+		Stop
+	}
+}
+
+ACTOR PlasmaSmartMissile
+{
+	Scale 0.75
+	Radius 11
+	Height 8
+	Speed 50
+	Damage (100)
+	Projectile
+	DeathSound "MercuryMissile/Explode"
+	Decal Scorch
+	DamageType Fire
+	Scale 0.5
+	States
+	{
+	Spawn:
+		MRCM A 1 Bright A_SpawnItemEx("ColaMissileFlameSmaller",-15)
+		loop
+	Death:
+		FRME A 0 A_SetScale(0.5, 0.5)
+		FRME AAAAAAAAA 0 A_SpawnProjectile("PlasmaSmartMissileBullet", 0, 0, frandom(90.0,270.0), CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_ABSOLUTEPITCH, random(-30,30))
+		FRME A 2 BRIGHT A_Scream
+		FRME B 2 BRIGHT A_Explode(32, 96, 0)
+		FRME BCDEFGHIJ 2 BRIGHT
+		Stop
+	}
+}
+
+ACTOR PlasmaSmartMissileBullet : PlasmaAutorifleBullet
+{
+	Damage (10*random(1,3))
+	Translation "0:255=%[0.00,0.00,0.00]:[0.00,2.00,0.00]"
+	+SEEKERMISSILE
+	Speed 10
+	States
+	{
+	Spawn:
+		SLSS ABCDEF 2 Bright {
+			A_SeekerMissile(360,25, SMF_LOOK|SMF_PRECISE);
+			A_SpawnItemEx("PlasmaSmartMissileBulletTrail");
+		}
+		Loop
+	Death:
+		SLSE ABCDEF 2 Bright
+		Stop
+	}
+}
+
+ACTOR PlasmaSmartMissileBulletTrail : PlasmaAutorifleBulletTrail
+{
+	Translation "0:255=%[0.00,0.00,0.00]:[0.00,2.00,0.00]"
+}
+
+ACTOR ColaMissileFlameSmaller : ColaMissileFlame
+{
+	Scale 0.1
+}
+
+ACTOR PlasmaAutorifle : ColaWeapon replaces Chaingun
+{
+	Weapon.AmmoType1 "PlasmaAutorifleHeat"
+	Weapon.AmmoUse1 0
+	Weapon.SlotNumber 4
+	Weapon.AmmoType2 "PlasmaAutorifleExp"
+	Weapon.AmmoUse2 5
+	Weapon.AmmoGive2 0
+	Weapon.SisterWeapon "PlasmaAutorifleSuper"
+	Inventory.PickupMessage "Plasma Autorifle - \"The hotter, the faster!\" (Slot 4)"
+	Inventory.PickupSound "Pickups/GetPlasma"
+	Tag "Plasma Autorifle"
+	+Weapon.Ammo_Optional
+	+Weapon.Alt_Ammo_Optional
+    Inventory.Icon "PARPA0"
+	States
+	{
+	Spawn:
+		PARP A 0 NoDelay A_CheckFlag("TOSSED", "DropNothing")
+		PARP A -1
+		Wait
+	DropNothing:
+		PARP A 0
+		Stop // Poof!
+	Select:
+		ZPLV A 0 A_GiveInventory("PlasmaAutorifleSelected", 1)
+		ZPLV A 1 {
+			A_Raise;
+			A_Raise;
+		}
+		Wait
+	Deselect:
+		ZPLV A 0 A_TakeInventory("PlasmaAutorifleSelected", 999)
+		ZPLV A 1 {
+			A_Lower;
+			A_Lower;
+			}
+		Wait
+	Ready:
+		ZPL0 A 0 A_JumpIfInventory("PlasmaAutorifleLevel", 3, "Ready3")
+		ZPL0 A 0 A_JumpIfInventory("PlasmaAutorifleLevel", 2, "Ready2")
+		ZPL0 A 0 A_JumpIfInventory("PlasmaAutorifleLevel", 1, "Ready1")
+		ZPL0 A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Goto Ready
+	Ready1:
+		ZPL1 A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Goto Ready
+	Ready2:
+		ZPL2 A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Goto Ready
+	Ready3:
+		ZPL3 A 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Goto Ready
+	Fire:
+		"####" A 0 A_JumpIfInventory("PlasmaAutorifleHeat", 1490, "Overheat")
+		"####" B 1 BRIGHT {
+			A_GunFlash;
+			A_AlertMonsters;
+			if (CountInv("PlasmaAutorifleLevel") < 1) {
+				A_FireCustomMissile("PlasmaAutorifleBullet", frandom(-3.0, 3.0), 1, 8, 0, FPF_AIMATANGLE, frandom(-2.0, 2.0));
+				A_PlayWeaponSound("PlasmaAutorifle/Fire0");
+			}
+			else if (CountInv("PlasmaAutorifleLevel") == 1) {
+				A_FireCustomMissile("PlasmaAutorifleBulletLevel1", frandom(-3.0, 3.0), 1, 8, 0, FPF_AIMATANGLE, frandom(-2.0, 2.0));
+				A_PlayWeaponSound("PlasmaAutorifle/Fire1");
+			}
+			else if (CountInv("PlasmaAutorifleLevel") == 2) {
+				A_FireCustomMissile("PlasmaAutorifleBulletLevel2", frandom(-3.0, 3.0), 1, 8, 0, FPF_AIMATANGLE, frandom(-2.0, 2.0));
+				A_PlayWeaponSound("PlasmaAutorifle/Fire2");
+			}
+			else if (CountInv("PlasmaAutorifleLevel") > 2) {
+				A_FireCustomMissile("PlasmaAutorifleBulletLevel3", frandom(-3.0, 3.0), 1, 8, 0, FPF_AIMATANGLE, frandom(-2.0, 2.0));
+				A_PlayWeaponSound("PlasmaAutorifle/Fire3");
+			}
+			//A_WeaponOffset(5.0, 5.0, WOF_ADD|WOF_INTERPOLATE);
+		}
+		"####" A 1 BRIGHT {
+			if (CountInv("PlasmaAutoRifleHeat") <= 200 && CountInv("PlasmaAutorifleLevel") < 1) { 
+				A_GiveInventory("PlasmaAutoRifleHeat", 80);
+				//A_WeaponOffset(-1.0, -1.0, WOF_ADD|WOF_INTERPOLATE);
+				return state("FireReturn5");
+			}
+			else if (CountInv("PlasmaAutoRifleHeat") <= 400 && CountInv("PlasmaAutorifleLevel") < 2 ) { 
+				A_GiveInventory("PlasmaAutoRifleHeat", 55);
+				//A_WeaponOffset(-1.5, -1.5, WOF_ADD|WOF_INTERPOLATE);
+				return state("FireReturn4");
+			}
+			else if (CountInv("PlasmaAutoRifleHeat") <= 750) { 
+				A_GiveInventory("PlasmaAutoRifleHeat", 40);
+				//A_WeaponOffset(-2.0, -2.0, WOF_ADD|WOF_INTERPOLATE);
+				return state("FireReturn3");
+			}
+			else if (CountInv("PlasmaAutoRifleHeat") <= 1100) { 
+				A_GiveInventory("PlasmaAutoRifleHeat", 30);
+				//A_WeaponOffset(-2.5, -2.5, WOF_ADD|WOF_INTERPOLATE);
+				return state("FireReturn2");
+			}
+			else if (CountInv("PlasmaAutoRifleHeat") > 1100) { 
+				A_GiveInventory("PlasmaAutoRifleHeat", 19);
+				//A_WeaponOffset(-3.0, -3.0, WOF_ADD|WOF_INTERPOLATE);
+				return state("FireReturn1");
+			}
+			return state("Null");
+		}
+	FireReturn5:
+		"####" AAAAA 1 //A_WeaponOffset(-1.0, -1.0, WOF_ADD|WOF_INTERPOLATE)
+		Goto Ready
+	FireReturn4:
+		"####" AAAA 1 //A_WeaponOffset(-1.0, -1.0, WOF_ADD|WOF_INTERPOLATE)
+		Goto Ready
+	FireReturn3:
+		"####" AAA 1 //A_WeaponOffset(-1.0, -1.0, WOF_ADD|WOF_INTERPOLATE)
+		Goto Ready
+	FireReturn2:
+		"####" AA 1 //A_WeaponOffset(-1.0, -1.0, WOF_ADD|WOF_INTERPOLATE)
+		Goto Ready
+	FireReturn1:
+		"####" A 1 //A_WeaponOffset(frandom(4.0, 10.0), frandom(34.0, 44.0), WOF_INTERPOLATE)
+		Goto Ready
+	Overheat:
+		ZPLV A 0 A_JumpIfInventory("PlasmaAutorifleLevel", 3, "OverheatFlamer")
+		ZPLV A 0 A_PlaySound("plasmaautorifle/heathiss", CHAN_AUTO)
+	OverheatLoop:
+		ZPLV A 0 A_PlaySound("plasmaautorifle/heatbeep", CHAN_AUTO)
+		ZPLV BBBBAAAAAAAAAA 1 {
+			//A_SpawnItemEx("TinyGunSmoke", 16,4,36, 2.0, 2.0, 1.0);
+			A_FireProjectile("PlasmaBarrelSmoke",0,0,0,0,FPF_NOAUTOAIM,0);
+			A_TakeInventory("PlasmaAutorifleHeat", 15);
+		}
+		ZPLV A 0 A_JumpIfInventory("PlasmaAutorifleHeat", 50, "OverheatLoop")
+		Goto Ready
+	OverheatFlamer:
+		ZPLV A 0 A_PlaySound("plasmaautorifle/heatbeep", CHAN_AUTO)
+		ZPLV BBBBAAAAAAAAAA 1 {
+			//A_SpawnItemEx("TinyGunSmoke", 16,4,36, 2.0, 2.0, 1.0);
+			A_FireProjectile("PlasmaBarrelSmoke",0,0,0,0,FPF_NOAUTOAIM,0);
+			A_FireCustomMissile("OverheatFlamebolt", 0, 0, 8);
+			A_TakeInventory("PlasmaAutorifleHeat", 10);
+		}
+		ZPLV A 0 A_JumpIfInventory("PlasmaAutorifleHeat", 50, "OverheatFlamer")
+		Goto Ready
+	Altfire:
+		ZPLV A 0 A_JumpIfNoAmmo("Dryfire")
+		ZPLV A 1 {
+			A_AlertMonsters;
+			A_GunFlash;
+			A_PlaySound("MercuryMissile/Fire", CHAN_WEAPON);
+			A_FireCustomMissile("PlasmaMercuryMissile", 0,1,8, -2);
+			A_WeaponOffset(2, 2, WOF_ADD|WOF_INTERPOLATE);
+		}
+		ZPLV A 1 A_Weaponoffset(8, 8, WOF_ADD|WOF_INTERPOLATE)
+		ZPLV A 1 A_Weaponoffset(1, 1, WOF_ADD|WOF_INTERPOLATE)
+		ZPLV A 1 A_Weaponoffset(-2, -2, WOF_ADD|WOF_INTERPOLATE)
+		ZPLV A 1 A_Weaponoffset(-4, -4, WOF_ADD|WOF_INTERPOLATE)
+		ZPLV A 1 A_Weaponoffset(-8, -8, WOF_ADD|WOF_INTERPOLATE)
+		ZPLV A 1 A_Weaponoffset(-4, -4, WOF_ADD|WOF_INTERPOLATE)
+		ZPLV A 10 A_WeaponReady(WRF_NOSECONDARY)
+		Goto Ready
+	Dryfire:
+		ZPLV A 1 A_PlaySound("weapons/dryfire", 5)
+		ZPLV A 1 Offset(2,34)
+		ZPLV A 1 Offset(1,33)
+		ZPLV A 10 A_WeaponReady(WRF_NOSECONDARY)
+		Goto Ready
+	Flash:
+		TNT1 A 0 A_JumpIf(GetCVAR("colavr_weapons_mf")==true, "MuzzleFlash")
+		TNT1 A 1 A_Light2
+		TNT1 A 1 A_Light1
+		TNT1 A 1 A_Light0
+		Stop
+	MuzzleFlash:
+		PMF1 A 0 A_JumpIfInventory("PlasmaAutorifleLevel", 3, "Flash4")
+		PMF1 A 0 A_JumpIfInventory("PlasmaAutorifleLevel", 2, "Flash3")
+		PMF1 A 0 A_JumpIfInventory("PlasmaAutorifleLevel", 1, "Flash2")
+		PMF1 A 1 Bright A_Light2
+		TNT1 A 1 A_Light1
+		TNT1 A 1 A_Light0
+		Stop
+	Flash2:
+		PMF2 A 1 Bright A_Light2
+		TNT1 A 1 A_Light1
+		TNT1 A 1 A_Light0
+		Stop
+	Flash3:
+		PMF3 A 1 Bright A_Light2
+		TNT1 A 1 A_Light1
+		TNT1 A 1 A_Light0
+		Stop
+	Flash4:
+		PMF4 A 1 Bright A_Light2
+		TNT1 A 1 A_Light1
+		TNT1 A 1 A_Light0
+		Stop
+	}
+}
+
+ACTOR PlasmaAutorifleSuper : PlasmaAutorifle
+{
+	Weapon.SisterWeapon "PlasmaAutorifle"
+	+POWERED_UP
+	States
+	{
+	Ready:
+		ZPLV B 1 A_WeaponReady(WRF_ALLOWZOOM)
+		Goto Ready
+	Fire:
+		ZPLF B 1 BRIGHT {
+			A_GunFlash;
+			A_AlertMonsters;
+			A_FireCustomMissile("PlasmaAutorifleBulletLevelX", frandom(-3.0, 3.0), 1, 8, 0, FPF_AIMATANGLE, frandom(-2.0, 2.0));
+			A_PlayWeaponSound("PlasmaAutorifle/FireX");
+			//A_WeaponOffset(5.0, 5.0, WOF_ADD|WOF_INTERPOLATE);
+			if ( CountInv("PlasmaAutorifleHeat") > 1300 )
+			{
+				//A_SpawnItemEx("TinyGunSmoke", 16,4,36, 2.0, 2.0, 1.0);
+				A_FireProjectile("PlasmaBarrelSmoke",0,0,0,0,FPF_NOAUTOAIM,0);
+				A_FireCustomMissile("OverheatFlamebolt", 0, 0, 8);
+				A_TakeInventory("PlasmaAutorifleHeat", 10);
+			}
+		}
+		ZPLV B 1 BRIGHT {
+			A_GiveInventory("PlasmaAutoRifleHeat", 60);
+			//A_WeaponOffset(-2.5, -2.5, WOF_ADD|WOF_INTERPOLATE);
+		}
+		ZPLV BB 1 //A_WeaponOffset(-1.0, -1.0, WOF_ADD|WOF_INTERPOLATE)
+		Goto Ready
+	Altfire:
+		ZPLV A 0 A_JumpIfNoAmmo("Dryfire")
+		ZPLV A 1 {
+			A_AlertMonsters;
+			A_GunFlash;
+			A_PlaySound("MercuryMissile/SmartFire", CHAN_WEAPON);
+			A_FireCustomMissile("PlasmaSmartMissile", 0,1,8, -2);
+			A_WeaponOffset(2, 2, WOF_ADD|WOF_INTERPOLATE);
+		}
+		ZPLV A 1 A_Weaponoffset(8, 8, WOF_ADD|WOF_INTERPOLATE)
+		ZPLV A 1 A_Weaponoffset(1, 1, WOF_ADD|WOF_INTERPOLATE)
+		ZPLV A 1 A_Weaponoffset(-2, -2, WOF_ADD|WOF_INTERPOLATE)
+		ZPLV A 1 A_Weaponoffset(-4, -4, WOF_ADD|WOF_INTERPOLATE)
+		ZPLV A 1 A_Weaponoffset(-8, -8, WOF_ADD|WOF_INTERPOLATE)
+		ZPLV A 1 A_Weaponoffset(-4, -4, WOF_ADD|WOF_INTERPOLATE)
+		ZPLV A 10 A_WeaponReady(WRF_NOSECONDARY)
+		Goto Ready
+	Dryfire:
+		ZPLV A 1 A_PlaySound("weapons/dryfire", 5)
+		ZPLV A 1 Offset(2,34)
+		ZPLV A 1 Offset(1,33)
+		ZPLV A 10 A_WeaponReady(WRF_NOSECONDARY)
+		Goto Ready
+	Flash:
+		ZPMF A 1 Bright A_Light2
+		TNT1 A 1 A_Light1
+		TNT1 A 1 A_Light0
+		Stop
+	}
+}
+	
+
+ACTOR OverheatFlamebolt
+{
+	Damage (random(1,4))
+	Alpha .9
+	RenderStyle Add
+	Speed 25
+	Radius 16
+	Scale .05
+	Projectile
+	+RIPPER
+	+BLOODLESSIMPACT
+	+DONTBLAST
+	SeeSound "plasmaautorifle/flamerfire"
+	DamageType Fire
+	Decal Scorch
+	Obituary "%o was burninated by %k."
+	ProjectileKickback 20
+	States
+	{
+	Spawn:
+		FBLX A 0 NoDelay //A_Jump(128,"SpawnMirrored")
+		FBLX ABCD 2 BRIGHT A_SetScale(scalex+0.05)
+		FBLX E 0 A_Explode(2,64,0)
+		FBLX E 2 BRIGHT A_SetScale(scalex+0.05)
+		FBLX FGHI 2 BRIGHT A_SetScale(scalex+0.1)
+		FBLX JK 2 BRIGHT A_SetScale(scalex+0.15)
+		Stop
+	/*SpawnMirrored:
+		FBLX A 0 A_SetScale(-0.1,0.1)
+		FBLX ABCD 2 BRIGHT A_SetScale(scalex-0.05)
+		FBLX E 0 A_Explode(2,64)
+		FBLX E 2 BRIGHT A_SetScale(scalex-0.05)
+		FBLX FGHI 2 BRIGHT A_SetScale(scalex-0.1)
+		FBLX JK 2 BRIGHT A_SetScale(scalex-0.15)*/
+	Death:
+		FBLX A 1 Bright A_Explode(2,64,0)
+		FBLX BCDEFGHIJK 1 BRIGHT
+		Stop
+	}
+}

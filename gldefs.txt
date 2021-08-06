@@ -1,0 +1,51 @@
+#include "GLDEFS/ModelShading.txt"
+
+
+//Brightmaps
+
+brightmap texture models/weapons/toothpastelaser/particlegun.jpg
+{
+   map models/weapons/toothpastelaser/particlegun_bm.jpg
+}
+
+brightmap texture models/weapons/toothpastelaser/particlegun_display1.png
+{
+   map models/weapons/toothpastelaser/particlegun_display_bm.png
+}
+brightmap texture models/weapons/toothpastelaser/particlegun_display2.png
+{
+   map models/weapons/toothpastelaser/particlegun_display_bm.png
+}
+brightmap texture models/weapons/toothpastelaser/particlegun_display3.png
+{
+   map models/weapons/toothpastelaser/particlegun_display_bm.png
+}
+brightmap texture models/weapons/toothpastelaser/particlegun_display4.png
+{
+   map models/weapons/toothpastelaser/particlegun_display_bm.png
+}
+brightmap texture models/weapons/toothpastelaser/particlegun_display5.png
+{
+   map models/weapons/toothpastelaser/particlegun_display_bm.png
+}
+
+brightmap texture models/weapons/plasmagun/heat1.png
+{
+   map models/weapons/plasmagun/plasma_display_bm.png
+}
+brightmap texture models/weapons/plasmagun/heat2.png
+{
+   map models/weapons/plasmagun/plasma_display_bm.png
+}
+brightmap texture models/weapons/plasmagun/heat3.png
+{
+   map models/weapons/plasmagun/plasma_display_bm.png
+}
+brightmap texture models/weapons/plasmagun/heat4.png
+{
+   map models/weapons/plasmagun/plasma_display_bm.png
+}
+brightmap texture models/weapons/plasmagun/heat5.png
+{
+   map models/weapons/plasmagun/plasma_display_bm.png
+}

@@ -1,0 +1,19 @@
+Robocop Weapons mod for VR
+
+A GZDoom VR weapon mod for Cola 3 mod by Ermac (https://www.reddit.com/user/iAmErmac)
+
+Resource credits:
+=================
+wildweasel - for creating Cola 3: The Soda of Style
+Sgt Mark IV (Brutal Doom) - for enhanced smoke effect sprites and codes
+Cherno - for SimSun shader
+
+Revolver - Blacklight: Retribution
+KS-23 shotgun - https://sketchfab.com/3d-models/ks-23-shotgun-free-model-20dd417c1cc94b65b21adf89a46b1d70
+Plasma Rifle - https://sketchfab.com/3d-models/doom-2016-plasma-gun-d9777005def242cd958cf822f3902a1e
+Sidewinder - Titanfall 2
+Piledriver - https://sketchfab.com/3d-models/pancor-jackhammer-37ea7029ca084f8eb4ebbe17d600da8b
+Toothpaste laser - https://sketchfab.com/3d-models/mk-75-experimental-particle-accelerator-ca83cdc8bd9443e884dcd88e896e6102
+Frying pan - https://sketchfab.com/3d-models/free-model-old-rusty-frying-pan-1fdc84a7be2c4348b281490c89d76062
+Hand model - https://sketchfab.com/3d-models/fps-hands-rigged-1a3a2721ecc6497b9ff86bc54a110c42
+All 3D models and model textures edited and modified by Ermac

@@ -1,0 +1,19 @@
+AddOptionMenu "OptionsMenu"
+{
+	StaticText " "
+	Submenu "Cola VR Settings", "COLAVR_Settings"
+}
+
+OptionMenu "COLAVR_Settings" {
+	Title "Cola VR Settings"
+	StaticText " "
+	
+	Option "Gun barrel smoke", "colavr_weapons_smoke", "OnOff"
+	Option "Muzzle Flash sprite", "colavr_weapons_mf", "OnOff"
+	StaticText " "
+	StaticText " "
+	StaticText "Cola 3 Cheats", "Gold"
+	Command "Drop 30 bubbles", "summon ColaBubblesCheat"
+	Command "Give Zero Cal Cola (Level X)", "give ZeroCafCola"
+	Command "Give Super Max Cola (Regen + Barrier)", "give SuperMaxCola"
+}

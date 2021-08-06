@@ -1,0 +1,3 @@
+
+server bool colavr_weapons_smoke = true;
+server bool colavr_weapons_mf = true;
