@@ -6,6 +6,8 @@ This mod replaces all weapons for Cola 3 Doom mod (https://wildweasel.itch.io/co
 
 [![Download Now](https://raster.shields.io/github/downloads/iAmErmac/Cola-3-VR-Weapons/total)](https://github.com/iAmErmac/Cola-3-VR-Weapons/releases/latest)
 
+[<img src="https://cdn.ko-fi.com/cdn/kofi2.png?v=2" height="36" alt="Buy me a Cofee!">](https://ko-fi.com/ermac)
+
 ## Features
 * 3D weapon models
 * Enhanced smokes and bullet tracers
