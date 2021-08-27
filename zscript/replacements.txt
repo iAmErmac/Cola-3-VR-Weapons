@@ -1,0 +1,18 @@
+
+Class ColaWeaponReplace: EventHandler
+{
+	override void CheckReplacement(ReplaceEvent e)
+	{
+		switch(GetDefaultByType(e.Replacee).GetSpecies())
+		{
+			case 'Pistol': e.Replacement = 'ColaHandgun';  break;
+			case 'Shotgun': e.Replacement = 'PumpShotgun';  break;
+			case 'SuperShotgun': e.Replacement = 'DualPumpShotgun';  break;
+			case 'Chainsaw': e.Replacement = 'CardThrower';  break;
+			case 'Chaingun': e.Replacement = 'PlasmaAutorifle';  break;
+			case 'RocketLauncher': e.Replacement = 'MissileLauncher';  break;
+			case 'PlasmaRifle': e.Replacement = 'Piledriver';  break;
+			case 'BFG9000': e.Replacement = 'ToothpasteLaser';  break;
+		}
+	}
+}

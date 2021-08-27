@@ -7,6 +7,7 @@ Resource credits:
 wildweasel - for creating Cola 3: The Soda of Style
 Sgt Mark IV (Brutal Doom) - for enhanced smoke effect sprites and codes
 Cherno - for SimSun shader
+M8f - for some zscript codes
 
 Revolver - Blacklight: Retribution
 KS-23 shotgun - https://sketchfab.com/3d-models/ks-23-shotgun-free-model-20dd417c1cc94b65b21adf89a46b1d70

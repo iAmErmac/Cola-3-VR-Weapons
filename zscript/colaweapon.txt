@@ -138,3 +138,7 @@ Class SwingingFryingPan : Inventory
 	Inventory.Maxamount 1;
 	}
 }
+
+#include "zscript/replacements.txt"
+#include "zscript/superhuman_attributes.txt"
+#include "zscript/superhuman_moves.txt"

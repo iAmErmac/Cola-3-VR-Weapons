@@ -1,0 +1,12 @@
+
+gameinfo
+{
+	playerclasses="WWColaPlayer"
+	statusbarclass = "ColaStatusBar"
+	quitmessages = "$ColaQuit1", "$ColaQuit2", "$ColaQuit3", "$ColaQuit4", "$ColaQuit5", "$ColaQuit6", "$ColaQuit7", "$ColaQuit8", "$ColaQuit9", "$ColaQuit10", "$ColaQuit11", "$ColaQuit12", "$ColaQuit13", "$ColaQuit14", "$ColaQuit15", "$ColaQuit16", "$ColaQuit17", "$ColaQuit18", "$ColaQuit19"
+	quitsound = "quitsound"
+	ForceKillScripts = true
+    	infopage = "origins1", "origins2"
+
+	EventHandlers = "ColaWeaponReplace", "PlayerPropModifier", "SuperHumanMovesHandler"
+}

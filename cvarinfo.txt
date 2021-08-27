@@ -1,3 +1,15 @@
 
 server bool colavr_weapons_smoke = true;
 server bool colavr_weapons_mf = true;
+
+server float colavr_damage_mult = 1.0;
+server float colavr_jump_mult = 1.0;
+server float colavr_speed_mult = 1.0;
+server float colavr_dash_mult = 0.5;
+server float colavr_dash_cooldown = 1.0;
+server bool colavr_double_dash = false;
+server bool colavr_double_jump = false;
+server bool colavr_ledge_climb = false;
+server bool colavr_health_regen = false;
+server bool colavr_critical_heal = true;
+server float colavr_regen_time = 5;
