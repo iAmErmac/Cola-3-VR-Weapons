@@ -1,0 +1,137 @@
+
+Model Piledriver
+{
+   Path "Models\Weapons\piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -33.0 -5.0
+   
+   //Ready
+   FrameIndex PDRV A 0 0	FrameIndex PDRV A 1 0
+   
+   //Reload
+   FrameIndex PDRV B 0 1	FrameIndex PDRV B 1 1
+   FrameIndex PDRV C 0 2	FrameIndex PDRV C 1 2
+   FrameIndex PDRV D 0 3	FrameIndex PDRV D 1 3
+   FrameIndex PDRV E 0 4	FrameIndex PDRV E 1 4
+   FrameIndex PDRV F 0 5	FrameIndex PDRV F 1 5
+   FrameIndex PDRV L 0 11	FrameIndex PDRV L 1 11
+   FrameIndex PDRV M 0 12	FrameIndex PDRV M 1 12
+   FrameIndex PDRV N 0 13	FrameIndex PDRV N 1 13
+   FrameIndex PDRV O 0 14	FrameIndex PDRV O 1 14
+   FrameIndex PDRV P 0 15	FrameIndex PDRV P 1 15
+   FrameIndex PDRV Q 0 16	FrameIndex PDRV Q 1 16
+   FrameIndex PDRV R 0 17	FrameIndex PDRV R 1 17
+   FrameIndex PDRV S 0 18	FrameIndex PDRV S 1 18
+   FrameIndex PDRV T 0 19	FrameIndex PDRV T 1 19
+}
+
+Model Piledriver
+{
+   Path "Models\Weapons\piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -33.0 -5.0
+   
+   NOINTERPOLATION
+   
+   FrameIndex PDRV F 0 5	FrameIndex PDRV F 1 5
+}
+
+//Reload
+Model Piledriver
+{
+   Path "Models\Weapons\piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -33.0 -2.0
+   
+   //Reload
+   FrameIndex PDRV G 0 6
+   FrameIndex PDRV H 0 7
+   FrameIndex PDRV I 0 8
+   FrameIndex PDRV J 0 9
+   FrameIndex PDRV K 0 10
+}
+
+
+//Super mode
+Model PileDriverSuper
+{
+   Path "Models\Weapons\piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -33.0 -2.0
+   
+   //Ready
+   FrameIndex PDRV A 0 0	FrameIndex PDRV A 1 0
+   
+   //Reload
+   FrameIndex PDRV B 0 1	FrameIndex PDRV B 1 1
+   FrameIndex PDRV C 0 2	FrameIndex PDRV C 1 2
+   FrameIndex PDRV D 0 3	FrameIndex PDRV D 1 3
+   FrameIndex PDRV E 0 4	FrameIndex PDRV E 1 4
+   FrameIndex PDRV L 0 11	FrameIndex PDRV L 1 11
+   FrameIndex PDRV M 0 12	FrameIndex PDRV M 1 12
+   FrameIndex PDRV N 0 13	FrameIndex PDRV N 1 13
+   FrameIndex PDRV O 0 14	FrameIndex PDRV O 1 14
+   FrameIndex PDRV P 0 15	FrameIndex PDRV P 1 15
+   FrameIndex PDRV Q 0 16	FrameIndex PDRV Q 1 16
+   FrameIndex PDRV R 0 17	FrameIndex PDRV R 1 17
+   FrameIndex PDRV S 0 18	FrameIndex PDRV S 1 18
+   FrameIndex PDRV T 0 19	FrameIndex PDRV T 1 19
+}
+
+Model PileDriverSuper
+{
+   Path "Models\Weapons\piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   Model 1 "jackhammer_mag.md3"
+   Skin 1 "jackhammer_mag.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -33.0 -5.0
+   
+   NOINTERPOLATION
+   
+   FrameIndex PDRV F 0 5	FrameIndex PDRV F 1 5
+}
+
+//Reload
+Model PileDriverSuper
+{
+   Path "Models\Weapons\piledriver"
+   Model 0 "jackhammer.md3"
+   SurfaceSkin 0 0 "jackhammer.png"
+   SurfaceSkin 0 1 "gas_label.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -33.0 -2.0
+   
+   //Reload
+   FrameIndex PDRV G 0 6
+   FrameIndex PDRV H 0 7
+   FrameIndex PDRV I 0 8
+   FrameIndex PDRV J 0 9
+   FrameIndex PDRV K 0 10
+}

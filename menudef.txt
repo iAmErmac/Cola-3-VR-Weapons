@@ -31,7 +31,7 @@ OptionMenu "colavr_SH_Settings" {
 	Option "Auto regenrate health", "colavr_health_regen", "OnOff"
 	Option "Critical health regeneration only", "colavr_critical_heal", "OnOff", "colavr_health_regen"
 	StaticText "With this option enabled health will be regenrated up to 30 points only", "DarkGrey"
-	Slider "Regenration interval (in sec)", "colavr_regen_time", "0.5", "10.0", "0.5", "1", "colavr_health_regen"
+	Slider "Regenration interval (in sec)", "colavr_regen_time", "0.5", "10.0", "0.5", "1"//, "colavr_health_regen" //this cvar check is making qzd 1.3 upset
 	StaticText " "
 	StaticText "Forward dash", "Gold"
 	Control "Dash move", "netevent \"sh_dash\""

@@ -1,0 +1,57 @@
+
+Model ToothpasteLaser
+{
+   Path "Models\Weapons\toothpastelaser"
+   Model 0 "particlegun.md3"
+   SurfaceSkin 0 0 "particlegun_ammo.png"
+   SurfaceSkin 0 1 "particlegun.jpg"
+   SurfaceSkin 0 2 "particlegun.jpg"
+   SurfaceSkin 0 3 "particlegun.jpg"
+   Model 1 "particlegun_display.md3"
+   Skin 1 "particlegun_display1.png"
+   
+   Scale -1.2 1.2 1.2
+   Offset 0.0 -34.0 -5.0
+   
+   //Ready
+   FrameIndex TPLG A 0 0	FrameIndex TPLG A 1 0
+   FrameIndex TPLG B 0 1	FrameIndex TPLG B 1 0
+   
+   //Fire
+   Skin 1 "particlegun_display5.png"
+   FrameIndex TPLG E 0 1	FrameIndex TPLG E 1 0
+}
+
+Model ToothpasteLaser
+{
+   Path "Models\Weapons\toothpastelaser"
+   Model 0 "particlegun.md3"
+   SurfaceSkin 0 0 "particlegun_ammo.png"
+   SurfaceSkin 0 1 "particlegun.jpg"
+   SurfaceSkin 0 2 "particlegun.jpg"
+   SurfaceSkin 0 3 "particlegun.jpg"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -34.0 -5.0
+   
+   //Firing
+   FrameIndex TPLG C 0 0
+}
+
+//Display overlay
+Model ToothpasteLaser
+{
+   Path "Models\Weapons\toothpastelaser"
+   Model 0 "particlegun_display.md3"
+   
+   Scale -1.2 1.2 1.2
+   Offset 0.0 -34.0 -5.0
+   
+   //Firing
+   Skin 0 "particlegun_display2.png"
+   FrameIndex TPLD A 0 0
+   Skin 0 "particlegun_display3.png"
+   FrameIndex TPLD B 0 0
+   Skin 0 "particlegun_display4.png"
+   FrameIndex TPLD C 0 0
+}

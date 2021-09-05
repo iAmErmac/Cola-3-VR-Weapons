@@ -1,0 +1,109 @@
+
+Model PlasmaAutorifle
+{
+   Path "Models\Weapons\plasmagun"
+   Model 0 "plasmagun.md3"
+   SurfaceSkin 0 0 "rifle.png"
+   SurfaceSkin 0 1 "rifle.png"
+   SurfaceSkin 0 2 "heat1.png"
+   
+   Scale -1.4 1.4 1.4
+   Offset 0.0 -35.0 -5.0
+   
+   //Orange laser
+   FrameIndex ZPL0 A 0 0
+   FrameIndex ZPL0 B 0 1
+   
+   //Purple laser
+   SurfaceSkin 0 2 "heat2.png"
+   FrameIndex ZPL1 A 0 0
+   FrameIndex ZPL1 B 0 1
+   
+   //Blue laser
+   SurfaceSkin 0 2 "heat3.png"
+   FrameIndex ZPL2 A 0 0
+   FrameIndex ZPL2 B 0 1
+   
+   //Green laser
+   SurfaceSkin 0 2 "heat4.png"
+   FrameIndex ZPL3 A 0 0
+   FrameIndex ZPL3 B 0 1
+   
+   //display off
+   SurfaceSkin 0 2 "heat.png"
+   FrameIndex ZPLV A 0 0
+   
+   //Red display warning
+   SurfaceSkin 0 2 "heat5.png"
+   FrameIndex ZPLV B 0 0
+}
+
+//Muzzle flash
+Model PlasmaAutorifle
+{
+   Path "Models\Weapons\plasmagun"
+   Model 0 "plasma_mf.md3"
+   SurfaceSkin 0 0 "plasma_mf.png"
+   SurfaceSkin 0 1 "plasma2_mf.png"
+   
+   Scale -2.0 2.0 2.0
+   Offset 0.0 -22.0 -10.0
+   
+   //Orange laser
+   FrameIndex PMF1 A 0 1
+   
+   //Purple laser
+   SurfaceSkin 0 0 "plasma_mf2.png"
+   SurfaceSkin 0 1 "plasma2_mf2.png"
+   FrameIndex PMF2 A 0 1
+   
+   //Blue laser
+   SurfaceSkin 0 0 "plasma_mf3.png"
+   SurfaceSkin 0 1 "plasma2_mf3.png"
+   FrameIndex PMF3 A 0 1
+   
+   //Green laser
+   SurfaceSkin 0 0 "plasma_mf4.png"
+   SurfaceSkin 0 1 "plasma2_mf4.png"
+   FrameIndex PMF4 A 0 1
+}
+
+//Super mode
+Model PlasmaAutorifleSuper
+{
+   Path "Models\Weapons\plasmagun"
+   Model 0 "plasmagun.md3"
+   SurfaceSkin 0 0 "rifle.png"
+   SurfaceSkin 0 1 "rifle.png"
+   SurfaceSkin 0 2 "heat1.png"
+   
+   Scale -1.4 1.4 1.4
+   Offset 0.0 -35.0 -5.0
+   
+   //Red laser
+   SurfaceSkin 0 2 "heat5.png"
+   FrameIndex ZPLF A 0 0
+   FrameIndex ZPLF B 0 0
+   
+   //display off
+   SurfaceSkin 0 2 "heat.png"
+   FrameIndex ZPLV A 0 0
+   
+   //Red display warning
+   SurfaceSkin 0 2 "heat5.png"
+   FrameIndex ZPLV B 0 0
+}
+
+//Super mode muzzle flash
+Model PlasmaAutorifleSuper
+{
+   Path "Models\Weapons\plasmagun"
+   Model 0 "plasma_mf.md3"
+   SurfaceSkin 0 0 "plasma_mf5.png"
+   SurfaceSkin 0 1 "plasma2_mf5.png"
+   
+   Scale -2.0 2.0 2.0
+   Offset 0.0 -22.0 -10.0
+   
+   FrameIndex ZPMF A 0 0
+}

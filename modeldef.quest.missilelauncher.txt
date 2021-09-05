@@ -1,0 +1,370 @@
+
+Model MissileLauncher
+{
+   Path "Models\Weapons\sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_reload.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   //Ready
+   FrameIndex SWRL A 0 0	FrameIndex SWRL A 1 0
+   FrameIndex SWRL B 0 0	FrameIndex SWRL B 1 4
+   FrameIndex SWRL C 0 0	FrameIndex SWRL C 1 9
+   FrameIndex SWRL D 0 0	FrameIndex SWRL D 1 14
+   FrameIndex SWRL E 0 0	FrameIndex SWRL E 1 19
+}
+
+//Empty
+Model MissileLauncher
+{
+   Path "Models\Weapons\sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   //Ready
+   FrameIndex RCKL A 0 0
+}
+
+//Fire - 5 ammo
+Model MissileLauncher
+{
+   Path "Models\Weapons\sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWF1 A 0 1	FrameIndex SWF1 A 1 1
+   FrameIndex SWF1 B 0 2	FrameIndex SWF1 B 1 2
+   FrameIndex SWF1 C 0 3	FrameIndex SWF1 C 1 3
+   FrameIndex SWF1 D 0 4	FrameIndex SWF1 D 1 4
+   FrameIndex SWF1 E 0 5	FrameIndex SWF1 E 1 5
+   FrameIndex SWF1 F 0 6	FrameIndex SWF1 F 1 6
+   FrameIndex SWF1 G 0 7	FrameIndex SWF1 G 1 7
+   FrameIndex SWF1 H 0 8	FrameIndex SWF1 H 1 8
+   FrameIndex SWF1 I 0 9	FrameIndex SWF1 I 1 9
+   FrameIndex SWF1 J 0 10	FrameIndex SWF1 J 1 10
+   FrameIndex SWF1 K 0 11	FrameIndex SWF1 K 1 11
+   FrameIndex SWF1 L 0 12	FrameIndex SWF1 L 1 12
+   FrameIndex SWF1 M 0 13	FrameIndex SWF1 M 1 13
+}
+
+//Fire - 4 ammo
+Model MissileLauncher
+{
+   Path "Models\Weapons\sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire2.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWF2 A 0 1	FrameIndex SWF2 A 1 1
+   FrameIndex SWF2 B 0 2	FrameIndex SWF2 B 1 2
+   FrameIndex SWF2 C 0 3	FrameIndex SWF2 C 1 3
+   FrameIndex SWF2 D 0 4	FrameIndex SWF2 D 1 4
+   FrameIndex SWF2 E 0 5	FrameIndex SWF2 E 1 5
+   FrameIndex SWF2 F 0 6	FrameIndex SWF2 F 1 6
+   FrameIndex SWF2 G 0 7	FrameIndex SWF2 G 1 7
+   FrameIndex SWF2 H 0 8	FrameIndex SWF2 H 1 8
+   FrameIndex SWF2 I 0 9	FrameIndex SWF2 I 1 9
+   FrameIndex SWF2 J 0 10	FrameIndex SWF2 J 1 10
+   FrameIndex SWF2 K 0 11	FrameIndex SWF2 K 1 11
+   FrameIndex SWF2 L 0 12	FrameIndex SWF2 L 1 12
+   FrameIndex SWF2 M 0 13	FrameIndex SWF2 M 1 13
+}
+
+//Fire - 3 ammo
+Model MissileLauncher
+{
+   Path "Models\Weapons\sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire3.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWF3 A 0 1	FrameIndex SWF3 A 1 1
+   FrameIndex SWF3 B 0 2	FrameIndex SWF3 B 1 2
+   FrameIndex SWF3 C 0 3	FrameIndex SWF3 C 1 3
+   FrameIndex SWF3 D 0 4	FrameIndex SWF3 D 1 4
+   FrameIndex SWF3 E 0 5	FrameIndex SWF3 E 1 5
+   FrameIndex SWF3 F 0 6	FrameIndex SWF3 F 1 6
+   FrameIndex SWF3 G 0 7	FrameIndex SWF3 G 1 7
+   FrameIndex SWF3 H 0 8	FrameIndex SWF3 H 1 8
+   FrameIndex SWF3 I 0 9	FrameIndex SWF3 I 1 9
+   FrameIndex SWF3 J 0 10	FrameIndex SWF3 J 1 10
+   FrameIndex SWF3 K 0 11	FrameIndex SWF3 K 1 11
+   FrameIndex SWF3 L 0 12	FrameIndex SWF3 L 1 12
+   FrameIndex SWF3 M 0 13	FrameIndex SWF3 M 1 13
+}
+
+//Fire - 2 ammo
+Model MissileLauncher
+{
+   Path "Models\Weapons\sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire4.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWF4 A 0 1	FrameIndex SWF4 A 1 1
+   FrameIndex SWF4 B 0 2	FrameIndex SWF4 B 1 2
+   FrameIndex SWF4 C 0 3	FrameIndex SWF4 C 1 3
+   FrameIndex SWF4 D 0 4	FrameIndex SWF4 D 1 4
+   FrameIndex SWF4 E 0 5	FrameIndex SWF4 E 1 5
+   FrameIndex SWF4 F 0 6	FrameIndex SWF4 F 1 6
+   FrameIndex SWF4 G 0 7	FrameIndex SWF4 G 1 7
+   FrameIndex SWF4 H 0 8	FrameIndex SWF4 H 1 8
+   FrameIndex SWF4 I 0 9	FrameIndex SWF4 I 1 9
+   FrameIndex SWF4 J 0 10	FrameIndex SWF4 J 1 10
+   FrameIndex SWF4 K 0 11	FrameIndex SWF4 K 1 11
+   FrameIndex SWF4 L 0 12	FrameIndex SWF4 L 1 12
+   FrameIndex SWF4 M 0 13	FrameIndex SWF4 M 1 13
+}
+
+//Fire - 1 ammo
+Model MissileLauncher
+{
+   Path "Models\Weapons\sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_fire5.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWF5 A 0 1	FrameIndex SWF5 A 1 1
+   FrameIndex SWF5 B 0 2	FrameIndex SWF5 B 1 2
+   FrameIndex SWF5 C 0 3	FrameIndex SWF5 C 1 3
+   FrameIndex SWF5 D 0 4	FrameIndex SWF5 D 1 4
+   FrameIndex SWF5 E 0 5	FrameIndex SWF5 E 1 5
+   FrameIndex SWF5 F 0 6	FrameIndex SWF5 F 1 6
+   FrameIndex SWF5 G 0 7	FrameIndex SWF5 G 1 7
+   FrameIndex SWF5 H 0 8	FrameIndex SWF5 H 1 8
+   FrameIndex SWF5 I 0 9	FrameIndex SWF5 I 1 9
+   FrameIndex SWF5 J 0 10	FrameIndex SWF5 J 1 10
+   FrameIndex SWF5 K 0 11	FrameIndex SWF5 K 1 11
+   FrameIndex SWF5 L 0 12	FrameIndex SWF5 L 1 12
+   FrameIndex SWF5 M 0 13	FrameIndex SWF5 M 1 13
+}
+
+//Reloading
+Model MissileLauncher
+{
+   Path "Models\Weapons\sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_reload.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex RCKL B 0 14	FrameIndex RCKL B 1 0
+   FrameIndex RCKL C 0 15	FrameIndex RCKL C 1 1
+   FrameIndex RCKL D 0 16	FrameIndex RCKL D 1 2
+   FrameIndex RCKL E 0 17	FrameIndex RCKL E 1 3
+   FrameIndex RCKL F 0 18	FrameIndex RCKL F 1 4
+   FrameIndex RCKL G 0 19	FrameIndex RCKL G 1 5
+   FrameIndex RCKL H 0 20	FrameIndex RCKL H 1 6
+   FrameIndex RCKL I 0 21	FrameIndex RCKL I 1 7
+   FrameIndex RCKL J 0 22	FrameIndex RCKL J 1 8
+   FrameIndex RCKL K 0 23	FrameIndex RCKL K 1 9
+   FrameIndex RCKL L 0 24	FrameIndex RCKL L 1 10
+   FrameIndex RCKL M 0 25	FrameIndex RCKL M 1 11
+   FrameIndex RCKL N 0 26	FrameIndex RCKL N 1 12
+   FrameIndex RCKL O 0 27	FrameIndex RCKL O 1 13
+   FrameIndex RCKL P 0 28	FrameIndex RCKL P 1 14
+   FrameIndex RCKL Q 0 28	FrameIndex RCKL Q 1 15
+   FrameIndex RCKL R 0 28	FrameIndex RCKL R 1 16
+   FrameIndex RCKL S 0 28	FrameIndex RCKL S 1 17
+   FrameIndex RCKL T 0 28	FrameIndex RCKL T 1 18
+   FrameIndex RCKL U 0 28	FrameIndex RCKL U 1 19
+}
+
+//Reloading full clip
+Model MissileLauncher
+{
+   Path "Models\Weapons\sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_full_reload.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWRR A 0 39	FrameIndex SWRR A 1 0
+   FrameIndex SWRR B 0 40	FrameIndex SWRR B 1 1
+   FrameIndex SWRR C 0 41	FrameIndex SWRR C 1 2
+   FrameIndex SWRR D 0 42	FrameIndex SWRR D 1 3
+   FrameIndex SWRR E 0 43	FrameIndex SWRR E 1 4
+   FrameIndex SWRR F 0 44	FrameIndex SWRR F 1 5
+   
+   FrameIndex SWRR G 0 30	FrameIndex SWRR G 1 5
+   FrameIndex SWRR H 0 31	FrameIndex SWRR H 1 5
+   FrameIndex SWRR I 0 32	FrameIndex SWRR I 1 5
+   FrameIndex SWRR J 0 33	FrameIndex SWRR J 1 5
+   FrameIndex SWRR K 0 34	FrameIndex SWRR K 1 5
+   FrameIndex SWRR L 0 35	FrameIndex SWRR L 1 5
+   FrameIndex SWRR M 0 36	FrameIndex SWRR M 1 5
+   FrameIndex SWRR N 0 37	FrameIndex SWRR N 1 5
+   FrameIndex SWRR O 0 38	FrameIndex SWRR O 1 5
+}
+
+//Bolt action
+Model MissileLauncher
+{
+   Path "Models\Weapons\sidewinder"
+   Model 0 "sidewinder.md3"
+   SurfaceSkin 0 0 "smr.png"
+   SurfaceSkin 0 1 "smr.png"
+   SurfaceSkin 0 2 "smr.png"
+   SurfaceSkin 0 3 "smr.png"
+   SurfaceSkin 0 4 "smr_ext1.png"
+   SurfaceSkin 0 5 "smr_plate.png"
+   Model 1 "sw_ammo_reload.md3"
+   Skin 1 "smr_ammo.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   //Full ammo reload
+   FrameIndex SWR1 A 0 30	FrameIndex SWR1 A 1 4
+   FrameIndex SWR1 B 0 31	FrameIndex SWR1 B 1 4
+   FrameIndex SWR1 C 0 32	FrameIndex SWR1 C 1 4
+   FrameIndex SWR1 D 0 33	FrameIndex SWR1 D 1 4
+   FrameIndex SWR1 E 0 34	FrameIndex SWR1 E 1 4
+   FrameIndex SWR1 F 0 35	FrameIndex SWR1 F 1 4
+   FrameIndex SWR1 G 0 36	FrameIndex SWR1 G 1 4
+   FrameIndex SWR1 H 0 37	FrameIndex SWR1 H 1 4
+   FrameIndex SWR1 I 0 38	FrameIndex SWR1 I 1 4
+   
+   //4 ammo reload
+   FrameIndex SWR2 A 0 30	FrameIndex SWR2 A 1 9
+   FrameIndex SWR2 B 0 31	FrameIndex SWR2 B 1 9
+   FrameIndex SWR2 C 0 32	FrameIndex SWR2 C 1 9
+   FrameIndex SWR2 D 0 33	FrameIndex SWR2 D 1 9
+   FrameIndex SWR2 E 0 34	FrameIndex SWR2 E 1 9
+   FrameIndex SWR2 F 0 35	FrameIndex SWR2 F 1 9
+   FrameIndex SWR2 G 0 36	FrameIndex SWR2 G 1 9
+   FrameIndex SWR2 H 0 37	FrameIndex SWR2 H 1 9
+   FrameIndex SWR2 I 0 38	FrameIndex SWR2 I 1 9
+   
+   //3 ammo reload
+   FrameIndex SWR3 A 0 30	FrameIndex SWR3 A 1 14
+   FrameIndex SWR3 B 0 31	FrameIndex SWR3 B 1 14
+   FrameIndex SWR3 C 0 32	FrameIndex SWR3 C 1 14
+   FrameIndex SWR3 D 0 33	FrameIndex SWR3 D 1 14
+   FrameIndex SWR3 E 0 34	FrameIndex SWR3 E 1 14
+   FrameIndex SWR3 F 0 35	FrameIndex SWR3 F 1 14
+   FrameIndex SWR3 G 0 36	FrameIndex SWR3 G 1 14
+   FrameIndex SWR3 H 0 37	FrameIndex SWR3 H 1 14
+   FrameIndex SWR3 I 0 38	FrameIndex SWR3 I 1 14
+   
+   //2 ammo reload
+   FrameIndex SWR4 A 0 30	FrameIndex SWR4 A 1 19
+   FrameIndex SWR4 B 0 31	FrameIndex SWR4 B 1 19
+   FrameIndex SWR4 C 0 32	FrameIndex SWR4 C 1 19
+   FrameIndex SWR4 D 0 33	FrameIndex SWR4 D 1 19
+   FrameIndex SWR4 E 0 34	FrameIndex SWR4 E 1 19
+   FrameIndex SWR4 F 0 35	FrameIndex SWR4 F 1 19
+   FrameIndex SWR4 G 0 36	FrameIndex SWR4 G 1 19
+   FrameIndex SWR4 H 0 37	FrameIndex SWR4 H 1 19
+   FrameIndex SWR4 I 0 38	FrameIndex SWR4 I 1 19
+}
+
+//Muzzle flash
+Model MissileLauncher
+{
+   Path "Models\Weapons\sidewinder"
+   Model 0 "sw_mf.md3"
+   Skin 0 "rocket_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -13.0 0.0
+   
+   FrameIndex SWMF A 0 0
+   Skin 0 "rocket_mf2.png"
+   FrameIndex SWMF B 0 1
+   Skin 0 "rocket_mf3.png"
+   FrameIndex SWMF C 0 2
+   Skin 0 "rocket_mf4.png"
+   FrameIndex SWMF D 0 3
+   Skin 0 "rocket_mf5.png"
+   FrameIndex SWMF E 0 4
+   Skin 0 "rocket_mf6.png"
+   FrameIndex SWMF F 0 5
+   Skin 0 "rocket_mf7.png"
+   FrameIndex SWMF G 0 6
+   Skin 0 "rocket_mf8.png"
+   FrameIndex SWMF H 0 7
+   Skin 0 "rocket_mf9.png"
+   FrameIndex SWMF I 0 8
+   Skin 0 "rocket_mf10.png"
+   FrameIndex SWMF J 0 9
+}

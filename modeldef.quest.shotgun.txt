@@ -1,0 +1,689 @@
+
+Model PumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex PSHT A 0 0
+   
+   //Fire
+   FrameIndex PSHT B 0 1
+   FrameIndex PSHT C 0 2
+   FrameIndex PSHT D 0 3
+   FrameIndex PSHT E 0 4
+   FrameIndex PSHT F 0 5
+   
+   //Pump
+   FrameIndex PSHT J 0 8
+   FrameIndex PSHT K 0 9
+   FrameIndex PSHT L 0 10
+}
+
+Model PumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   FrameIndex PSHT G 0 6
+   FrameIndex PSHT H 0 7
+   FrameIndex PSHT I 0 8
+}
+
+//Reloading
+Model PumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Prep reload
+   FrameIndex PSHR A 0 11
+   FrameIndex PSHR B 0 12
+   
+   //End reload
+   FrameIndex PSHR H 0 18
+   FrameIndex PSHR I 0 19
+   FrameIndex PSHR J 0 20
+}
+
+//Reloading
+Model PumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex PSHR C 0 13
+   FrameIndex PSHR D 0 14
+   FrameIndex PSHR E 0 15
+   FrameIndex PSHR F 0 16
+   FrameIndex PSHR G 0 17
+}
+
+//Muzzle flash
+Model PumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -7.0
+   
+   //Ready
+   FrameIndex PSMF A 0 1
+   FrameIndex PSMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PSMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PSMF D 0 3
+}
+
+
+//Super mode
+Model PumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex PSHT A 0 0
+   
+   //Fire
+   FrameIndex PSHT B 0 1
+   FrameIndex PSHT C 0 2
+   FrameIndex PSHT D 0 3
+   FrameIndex PSHT E 0 4
+   FrameIndex PSHT F 0 5
+   
+   //Pump
+   FrameIndex PSHT J 0 8
+   FrameIndex PSHT K 0 9
+   FrameIndex PSHT L 0 10
+}
+
+Model PumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   FrameIndex PSHT G 0 6
+   FrameIndex PSHT H 0 7
+   FrameIndex PSHT I 0 8
+}
+
+//Super mode reloading
+Model PumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   NOINTERPOLATION
+   
+   //Prep reload
+   FrameIndex PSHR A 0 11
+   FrameIndex PSHR B 0 12
+   FrameIndex PSHR C 0 13
+   
+   //Insert shell
+   FrameIndex PSHR D 0 14
+   FrameIndex PSHR E 0 15
+   FrameIndex PSHR F 0 16
+   FrameIndex PSHR G 0 17
+   
+   //End reload
+   FrameIndex PSHR H 0 18
+   FrameIndex PSHR I 0 19
+   FrameIndex PSHR J 0 20
+}
+
+//Super mode muzzle flash
+Model PumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -7.0
+   
+   //Ready
+   FrameIndex PSMF A 0 1
+   FrameIndex PSMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PSMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PSMF D 0 3
+}
+
+
+
+//Dual shotguns super mode
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_right.md3"
+   Skin 0 "shotgun.png"
+   Model 0 "shotgun_left.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex 2SHT Z 0 0	FrameIndex 2SHT Z 0 0
+}
+
+//Right shotgun
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_right.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex 2SHT A 0 0
+   
+   //Fire
+   FrameIndex 2SHT B 0 1
+   FrameIndex 2SHT C 0 2
+   
+   //Pump
+   FrameIndex 2SHT D 0 3
+   FrameIndex 2SHT E 0 4
+   FrameIndex 2SHT F 0 5
+   FrameIndex 2SHT J 0 8
+   FrameIndex 2SHT K 0 9
+   FrameIndex 2SHT L 0 10
+}
+
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   FrameIndex 2SHT G 0 6
+   FrameIndex 2SHT H 0 7
+   FrameIndex 2SHT I 0 8
+}
+
+//Right shotgun reloading
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Prep reload
+   FrameIndex 2SHR A 0 11
+   FrameIndex 2SHR B 0 12
+   
+   //End reload
+   FrameIndex 2SHR H 0 18
+   FrameIndex 2SHR I 0 19
+   FrameIndex 2SHR J 0 20
+}
+
+//Right shotgun reloading
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex 2SHR C 0 13
+   FrameIndex 2SHR D 0 14
+   FrameIndex 2SHR E 0 15
+   FrameIndex 2SHR F 0 16
+   FrameIndex 2SHR G 0 17
+}
+
+//Right shotgun muzzle flash
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_right_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -7.0
+   
+   //Ready
+   FrameIndex PSMF A 0 1
+   FrameIndex PSMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PSMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PSMF D 0 3
+}
+
+//Left shotgun
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_left.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex 3SHT A 0 0
+   
+   //Fire
+   FrameIndex 3SHT B 0 1
+   FrameIndex 3SHT C 0 2
+   
+   //Pump
+   FrameIndex 3SHT D 0 3
+   FrameIndex 3SHT E 0 4
+   FrameIndex 3SHT F 0 5
+   FrameIndex 3SHT J 0 8
+   FrameIndex 3SHT K 0 9
+   FrameIndex 3SHT L 0 10
+}
+
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   FrameIndex 3SHT G 0 6
+   FrameIndex 3SHT H 0 7
+   FrameIndex 3SHT I 0 8
+}
+
+//Left shotgun reloading
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Prep reload
+   FrameIndex 3SHR A 0 11
+   FrameIndex 3SHR B 0 12
+   
+   //End reload
+   FrameIndex 3SHR H 0 18
+   FrameIndex 3SHR I 0 19
+   FrameIndex 3SHR J 0 20
+}
+
+//Left shotgun reloading
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex 3SHR C 0 13
+   FrameIndex 3SHR D 0 14
+   FrameIndex 3SHR E 0 15
+   FrameIndex 3SHR F 0 16
+   FrameIndex 3SHR G 0 17
+}
+
+//Left shotgun muzzle flash
+Model DualPumpShotgun
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_left_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -7.0
+   
+   //Ready
+   FrameIndex PLMF A 0 1
+   FrameIndex PLMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PLMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PLMF D 0 3
+}
+
+
+
+//Dual shotguns
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_right.md3"
+   Skin 0 "shotgun.png"
+   Model 0 "shotgun_left.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex 2SHT Z 0 0	FrameIndex 2SHT Z 0 0
+}
+
+//Right shotgun
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_right.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex 2SHT A 0 0
+   
+   //Fire
+   FrameIndex 2SHT B 0 1
+   FrameIndex 2SHT C 0 2
+   
+   //Pump
+   FrameIndex 2SHT D 0 3
+   FrameIndex 2SHT E 0 4
+   FrameIndex 2SHT F 0 5
+   FrameIndex 2SHT J 0 8
+   FrameIndex 2SHT K 0 9
+   FrameIndex 2SHT L 0 10
+}
+
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   FrameIndex 2SHT G 0 6
+   FrameIndex 2SHT H 0 7
+   FrameIndex 2SHT I 0 8
+}
+
+//Right shotgun reloading
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //insert shells
+   
+   //Prep reload
+   FrameIndex 2SHR A 0 11
+   FrameIndex 2SHR B 0 12
+   
+   //End reload
+   FrameIndex 2SHR H 0 18
+   FrameIndex 2SHR I 0 19
+   FrameIndex 2SHR J 0 20
+}
+
+//Right shotgun reloading
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_right.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun.png"
+   SurfaceSkin 0 4 "shotgun_shell.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex 2SHR C 0 13
+   FrameIndex 2SHR D 0 14
+   FrameIndex 2SHR E 0 15
+   FrameIndex 2SHR F 0 16
+   FrameIndex 2SHR G 0 17
+}
+
+//Right shotgun muzzle flash
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_right_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -7.0
+   
+   //Ready
+   FrameIndex PSMF A 0 1
+   FrameIndex PSMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PSMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PSMF D 0 2
+}
+
+//Left shotgun
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_left.md3"
+   Skin 0 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Ready
+   FrameIndex 3SHT A 0 0
+   
+   //Fire
+   FrameIndex 3SHT B 0 1
+   FrameIndex 3SHT C 0 2
+   
+   //Pump
+   FrameIndex 3SHT D 0 3
+   FrameIndex 3SHT E 0 4
+   FrameIndex 3SHT F 0 5
+   FrameIndex 3SHT J 0 8
+   FrameIndex 3SHT K 0 9
+   FrameIndex 3SHT L 0 10
+}
+
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   FrameIndex 3SHT G 0 6
+   FrameIndex 3SHT H 0 7
+   FrameIndex 3SHT I 0 8
+}
+
+//Left shotgun reloading
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   //Prep reload
+   FrameIndex 3SHR A 0 11
+   FrameIndex 3SHR B 0 12
+   
+   //End reload
+   FrameIndex 3SHR H 0 18
+   FrameIndex 3SHR I 0 19
+   FrameIndex 3SHR J 0 20
+}
+
+//Left shotgun reloading
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_left.md3"
+   SurfaceSkin 0 0 "shotgun.png"
+   SurfaceSkin 0 1 "shotgun.png"
+   SurfaceSkin 0 2 "shotgun.png"
+   SurfaceSkin 0 3 "shotgun_shell.png"
+   SurfaceSkin 0 4 "shotgun.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -5.0
+   
+   NOINTERPOLATION
+   
+   //Insert shell
+   FrameIndex 3SHR C 0 13
+   FrameIndex 3SHR D 0 14
+   FrameIndex 3SHR E 0 15
+   FrameIndex 3SHR F 0 16
+   FrameIndex 3SHR G 0 17
+}
+
+//Left shotgun muzzle flash
+Model DualPumpShotgunSuper
+{
+   Path "Models\Weapons\shotgun"
+   Model 0 "shotgun_left_mf.md3"
+   Skin 0 "shotgun_mf.png"
+   
+   Scale -1.0 1.0 1.0
+   Offset 0.0 -35.0 -7.0
+   
+   //Ready
+   FrameIndex PLMF A 0 1
+   FrameIndex PLMF B 0 1
+   Skin 0 "shotgun_mf2.png"
+   FrameIndex PLMF C 0 2
+   Skin 0 "shotgun_mf3.png"
+   FrameIndex PLMF D 0 2
+}

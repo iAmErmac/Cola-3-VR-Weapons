@@ -1,8 +1,12 @@
 # Cola 3 weapons mod for VR
 
+![Cola 3](https://i.imgur.com/OHHZ0o1.png)
+
 A GZDoom VR weapon mod for Doom by Ermac (https://www.reddit.com/user/iAmErmac)
 
-This mod replaces all weapons for Cola 3 Doom mod (https://wildweasel.itch.io/cola-3-the-soda-of-style) with 3D models to use in VR. Should be playable with almost any map-packs for Doom
+This is a 3D weapon addon for Cola 3 Doom mod (https://wildweasel.itch.io/cola-3-the-soda-of-style) to use in VR. Should be playable with almost any map-packs for Doom.
+
+To download the Cola 3 VR mod click the download button below:
 
 [![Download Now](https://raster.shields.io/github/downloads/iAmErmac/Cola-3-VR-Weapons/total)](https://github.com/iAmErmac/Cola-3-VR-Weapons/releases/latest)
 
@@ -12,9 +16,14 @@ This mod replaces all weapons for Cola 3 Doom mod (https://wildweasel.itch.io/co
 * 3D weapon models
 * Enhanced smokes and bullet tracers
 
+## Known Issues
+* Plasma Rifle may cause frame-freeze sometimes when playing in QuestZDoom, probably when at level 3 or level X
+
 ## Installation
 
-GZDoom VR: https://github.com/hh79/gz3doom/releases
+### GZDoom VR (PC-VR)
+
+Latest GZDoom VR: https://github.com/hh79/gz3doom/releases
 
 To install:
 
@@ -23,7 +32,20 @@ To install:
     Copy this mod into the folder.
     Run with gzdoomvr.exe -iwad doom2.wad -file ww-cola3-v2.5.pk3 LATEST_MOD_FILE_NAME
   
-OR use ZDL: https://github.com/lcferrum/qzdl/releases to load mods with GZDoom
+OR use DoomRunner: https://github.com/Youda008/DoomRunner/releases/ to load mods with GZDoom
+
+### QuestZDoom (Oculus Quest)
+
+Official QuestZDoom: https://github.com/DrBeef/QuestZDoom/releases/latest
+Unofficial QuestZDoom (For more bugfixes and updates): https://github.com/emawind84/QuestZDoom/releases/latest
+
+QuestZDoom launcher: https://github.com/baggyg/QuestZDoomLauncher/releases/latest
+
+To install:
+
+    Copy ww-cola3-v2.5.pk3 and Cola 3 VR weapons mod into /sdcard/QuestZDoom/mods/
+    Load QuestZDoom Launcher. select the mods in following order and launch QuestZDoom:
+	Doom 2 + Cola 3 + Cola 3 VR weapons
 
 ## Recommended mods to combine with:
 
